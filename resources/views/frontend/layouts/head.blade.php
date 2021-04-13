@@ -31,12 +31,22 @@
 <link rel="stylesheet" href="{{asset('frontend/css/slicknav.min.css')}}">
 <!-- Jquery Ui -->
 <link rel="stylesheet" href="{{asset('frontend/css/jquery-ui.css')}}">
-
+<!-- custom para los kit-->
+ <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
+ <!--fin kit -->
 <!-- Eshop StyleSheet -->
 <link rel="stylesheet" href="{{asset('frontend/css/reset.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
+
+<!--slider mas vendidos-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- fin slider-->
 <style>
     /* Multilevel dropdown */
     .dropdown-submenu {

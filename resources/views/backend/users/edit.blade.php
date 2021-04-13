@@ -3,22 +3,22 @@
 @section('main-content')
 
 <div class="card">
-    <h5 class="card-header">Edit User</h5>
+    <h5 class="card-header">Editar Usuarios</h5>
     <div class="card-body">
       <form method="post" action="{{route('users.update',$user->id)}}">
-        @csrf 
+        @csrf
         @method('PATCH')
         <div class="form-group">
-          <label for="inputTitle" class="col-form-label">Name</label>
-        <input id="inputTitle" type="text" name="name" placeholder="Enter name"  value="{{$user->name}}" class="form-control">
+          <label for="inputTitle" class="col-form-label">Nombre</label>
+        <input id="inputTitle" type="text" name="name" placeholder="Ingresar Nombre"  value="{{$user->name}}" class="form-control">
         @error('name')
         <span class="text-danger">{{$message}}</span>
         @enderror
         </div>
 
         <div class="form-group">
-            <label for="inputEmail" class="col-form-label">Email</label>
-          <input id="inputEmail" type="email" name="email" placeholder="Enter email"  value="{{$user->email}}" class="form-control">
+            <label for="inputEmail" class="col-form-label">Correo</label>
+          <input id="inputEmail" type="email" name="email" placeholder="Ingresar Correo email"  value="{{$user->email}}" class="form-control">
           @error('email')
           <span class="text-danger">{{$message}}</span>
           @enderror
@@ -33,11 +33,11 @@
         </div> --}}
 
         <div class="form-group">
-        <label for="inputPhoto" class="col-form-label">Photo</label>
+        <label for="inputPhoto" class="col-form-label">Foto</label>
         <div class="input-group">
             <span class="input-group-btn">
                 <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                <i class="fa fa-picture-o"></i> Choose
+                <i class="fa fa-picture-o"></i> Examinar
                 </a>
             </span>
             <input id="thumbnail" class="form-control" type="text" name="photo" value="{{$user->photo}}">
@@ -47,7 +47,7 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        @php 
+        @php
         $roles=DB::table('users')->select('role')->where('id',$user->id)->get();
         // dd($roles);
         @endphp
@@ -65,17 +65,17 @@
           @enderror
           </div>
           <div class="form-group">
-            <label for="status" class="col-form-label">Status</label>
+            <label for="status" class="col-form-label">Estatus</label>
             <select name="status" class="form-control">
-                <option value="active" {{(($user->status=='active') ? 'selected' : '')}}>Active</option>
-                <option value="inactive" {{(($user->status=='inactive') ? 'selected' : '')}}>Inactive</option>
+                <option value="active" {{(($user->status=='active') ? 'selected' : '')}}>Activo</option>
+                <option value="inactive" {{(($user->status=='inactive') ? 'selected' : '')}}>Inactivo</option>
             </select>
           @error('status')
           <span class="text-danger">{{$message}}</span>
           @enderror
           </div>
         <div class="form-group mb-3">
-           <button class="btn btn-success" type="submit">Update</button>
+           <button class="btn btn-success" type="submit">Actualizar</button>
         </div>
       </form>
     </div>

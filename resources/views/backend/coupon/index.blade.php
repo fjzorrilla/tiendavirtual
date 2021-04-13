@@ -9,8 +9,8 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Coupon List</h6>
-      <a href="{{route('coupon.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Coupon</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Cupón</h6>
+      <a href="{{route('coupon.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Agregar cupón"><i class="fas fa-plus"></i> Agregar Cupón</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -19,33 +19,33 @@
           <thead>
             <tr>
               <th>S.N.</th>
-              <th>Coupon Code</th>
-              <th>Type</th>
-              <th>Value</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Código Cupón</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Estatus</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
                 <th>S.N.</th>
-                <th>Coupon Code</th>
-                <th>Type</th>
-                <th>Value</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>Código Cupón</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Estatus</th>
+                <th>Acción</th>
               </tr>
           </tfoot>
           <tbody>
-            @foreach($coupons as $coupon)   
+            @foreach($coupons as $coupon)
                 <tr>
                     <td>{{$coupon->id}}</td>
                     <td>{{$coupon->code}}</td>
                     <td>
                         @if($coupon->type=='fixed')
-                            <span class="badge badge-primary">{{$coupon->type}}</span>
+                            <span class="badge badge-primary">Entero</span>
                         @else
-                            <span class="badge badge-warning">{{$coupon->type}}</span>
+                            <span class="badge badge-warning">Porcentaje</span>
                         @endif
                     </td>
                     <td>
@@ -56,17 +56,17 @@
                         @endif</td>
                     <td>
                         @if($coupon->status=='active')
-                            <span class="badge badge-success">{{$coupon->status}}</span>
+                            <span class="badge badge-success">Activo</span>
                         @else
-                            <span class="badge badge-warning">{{$coupon->status}}</span>
+                            <span class="badge badge-warning">Inactivo</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('coupon.edit',$coupon->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <a href="{{route('coupon.edit',$coupon->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar Cupón" data-placement="bottom"><i class="fas fa-edit"></i></a>
                         <form method="POST" action="{{route('coupon.destroy',[$coupon->id])}}">
-                          @csrf 
+                          @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$coupon->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$coupon->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar Cupón"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                     {{-- Delete Modal --}}
@@ -81,7 +81,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" action="{{ route('banners.destroy',$user->id) }}">
-                                @csrf 
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
                               </form>
@@ -89,7 +89,7 @@
                           </div>
                         </div>
                     </div> --}}
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -129,7 +129,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
+
       $('#banner-dataTable').DataTable( {
             "columnDefs":[
                 {
@@ -142,7 +142,7 @@
         // Sweet alert
 
         function deleteData(id){
-            
+
         }
   </script>
   <script>

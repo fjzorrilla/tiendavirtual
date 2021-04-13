@@ -9,8 +9,8 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Users List</h6>
-      <a href="{{route('users.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add User</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Lista de Usuarios</h6>
+      <a href="{{route('users.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Agregar Usuario"><i class="fas fa-plus"></i> Agregar Usuarios</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -18,29 +18,29 @@
           <thead>
             <tr>
               <th>S.N.</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Photo</th>
-              <th>Join Date</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Foto</th>
+              <th>Fecha de Ingreso</th>
               <th>Role</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Estatus</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
                 <th>S.N.</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Photo</th>
-                <th>Join Date</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Action</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Foto</th>
+              <th>Fecha de Ingreso</th>
+              <th>Role</th>
+              <th>Estatus</th>
+              <th>Acción</th>
               </tr>
           </tfoot>
           <tbody>
-            @foreach($users as $user)   
+            @foreach($users as $user)
                 <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
@@ -62,11 +62,11 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <a href="{{route('users.edit',$user->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Editar" data-placement="bottom"><i class="fas fa-edit"></i></a>
                     <form method="POST" action="{{route('users.destroy',[$user->id])}}">
-                      @csrf 
+                      @csrf
                       @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$user->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$user->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                     {{-- Delete Modal --}}
@@ -81,7 +81,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" action="{{ route('users.destroy',$user->id) }}">
-                                @csrf 
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
                               </form>
@@ -89,7 +89,7 @@
                           </div>
                         </div>
                     </div> --}}
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -119,7 +119,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
+
       $('#user-dataTable').DataTable( {
             "columnDefs":[
                 {
@@ -132,7 +132,7 @@
         // Sweet alert
 
         function deleteData(id){
-            
+
         }
   </script>
   <script>
@@ -148,8 +148,8 @@
               // alert(dataID);
               e.preventDefault();
               swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
+                    title: "Esta seguro?",
+                    text: "Una vez eliminados, ¡no podrá recuperar estos datos!",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -158,7 +158,7 @@
                     if (willDelete) {
                        form.submit();
                     } else {
-                        swal("Your data is safe!");
+                        swal("¡Tus datos están seguros!");
                     }
                 });
           })
