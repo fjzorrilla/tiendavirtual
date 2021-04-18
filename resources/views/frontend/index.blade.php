@@ -312,9 +312,8 @@
                   <img class="hover-img" src="{{$photo[0]}}" alt="#">
                   @if($product->discount > 0)
                     <span class="out-of-stock">Oferta {{$product->discount}}%</span>
-                  @else
-                    <span>${{$product->price}}</span>
                   @endif
+                    
                 </a>
                 <div class="button-head">
                   <div class="product-action">

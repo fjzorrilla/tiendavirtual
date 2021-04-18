@@ -39,10 +39,10 @@
                                 @else
                                     <li><i class="ti-user"></i> <a href="{{route('user')}}"  target="_blank">Perfil</a></li>
                                 @endif
-                                <li><i class="ti-power-off"></i> <a href="{{route('user.logout')}}">Logout</a></li>
+                                <li><i class="ti-power-off"></i> <a href="{{route('user.logout')}}">Cerrar Sesion</a></li>
 
                             @else
-                                <li><i class="ti-power-off"></i><a href="{{route('login.form')}}">Login /</a> <a href="{{route('register.form')}}">Register</a></li>
+                                <li><i class="ti-power-off"></i><a href="{{route('login.form')}}">Iniciar Sesion /</a> <a href="{{route('register.form')}}">Registrar</a></li>
                             @endauth
                         </ul>
                     </div>
@@ -141,7 +141,7 @@
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
                                         <span>{{count(Helper::getAllProductFromCart())}} Items</span>
-                                        <a href="{{route('cart')}}">View Cart</a>
+                                        <a href="{{route('cart')}}">Ver Carrito</a>
                                     </div>
                                     <ul class="shopping-list">
                                         {{-- {{Helper::getAllProductFromCart()}} --}}
@@ -162,7 +162,7 @@
                                             <span>Total</span>
                                             <span class="total-amount">${{number_format(Helper::totalCartPrice(),2)}}</span>
                                         </div>
-                                        <a href="{{route('checkout')}}" class="btn animate">Checkout</a>
+                                        <a href="{{route('checkout')}}" class="btn animate">Comprar</a>
                                     </div>
                                 </div>
                             @endauth
@@ -222,7 +222,7 @@
                                     @endif
                                     <li>
                                         <i class="ti-power-off"></i> 
-                                            <a href="{{route('user.logout')}}">Logout</a>
+                                            <a href="{{route('user.logout')}}">Cerrar Sesion</a>
                                     </li>
                                     <li>
                                         <div class="sinlge-bar shopping">
