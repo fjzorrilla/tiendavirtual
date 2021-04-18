@@ -3614,3 +3614,24 @@ figure.snip0015:hover figcaption::before {
 .sectionsearch{
   padding-top: 55px;
 }
+.ti-bag:before {
+    content: "\e655";
+    color: white;
+    font-size: 22px;
+}
+.header .shopping {
+    display: inline-block;
+    z-index: 9999;
+    padding-top: 17px;
+}
+.total-count{
+    background: white;
+    border-radius: 100%;
+    padding: 0px 4px;
+    font-size: 15px;
+    font-weight: 700;
+    position: relative;
+    top: -14px;
+    left: -11px;
+}
+}

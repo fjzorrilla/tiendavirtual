@@ -178,7 +178,7 @@
         <div class="container">
             <div class="cat-nav-head">
                 <div class="row">
-                    <div class="col-lg-2 col-12">
+                    <div class="col-lg-3 col-12">
                         <div class="logo main hide">
                             @php
                                 $settings=DB::table('settings')->get();
@@ -188,7 +188,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-12">
+                    <div class="col-lg-6 col-12">
                         <div class="menu-area">
                             <!-- Main Menu -->
                             <nav class="navbar navbar-expand-lg">
@@ -196,12 +196,10 @@
                                     <div class="nav-inner">
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li class="{{Request::path()=='home' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>
-                                            <li class="{{Request::path()=='about-us' ? 'active' : ''}}"><a href="{{route('about-us')}}">About Us</a></li>
-                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Products</a><span class="new">New</span></li>
-                                                {{Helper::getHeaderCategory()}}
-                                            <li class="{{Request::path()=='blog' ? 'active' : ''}}"><a href="{{route('blog')}}">Blog</a></li>
-
-                                            <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a href="{{route('contact')}}">Contact Us</a></li>
+                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Más Vendidos</a>{{--<span class="new">New</span>--}}</li>
+                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Ofertas</a>{{--<span class="new">New</span>--}}</li>
+                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Humano / Mascota</a>{{--<span class="new">New</span>--}}</li>
+                                                {{--Helper::getHeaderCategory()--}}
                                         </ul>
                                     </div>
                                 </div>
@@ -245,6 +243,40 @@
                                 @endauth
                             </ul>
                             
+                        </div>
+                        <div class="sinlge-bar shopping">
+                            <a href="{{route('cart')}}" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helper::cartCount()}}</span></a>
+                            <!-- Shopping Item -->
+                            @auth
+                                <div class="shopping-item">
+                                    <div class="dropdown-cart-header">
+                                        <span>{{count(Helper::getAllProductFromCart())}} Items</span>
+                                        <a href="{{route('cart')}}">Ver Carrito</a>
+                                    </div>
+                                    <ul class="shopping-list">
+                                        {{-- {{Helper::getAllProductFromCart()}} --}}
+                                            @foreach(Helper::getAllProductFromCart() as $data)
+                                                    @php
+                                                        $photo=explode(',',$data->product['photo']);
+                                                    @endphp
+                                                    <li>
+                                                        <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+                                                        <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
+                                                        <h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
+                                                        <p class="quantity">{{$data->quantity}} x - <span class="amount">${{number_format($data->price,2)}}</span></p>
+                                                    </li>
+                                            @endforeach
+                                    </ul>
+                                    <div class="bottom">
+                                        <div class="total">
+                                            <span>Total</span>
+                                            <span class="total-amount">${{number_format(Helper::totalCartPrice(),2)}}</span>
+                                        </div>
+                                        <a href="{{route('checkout')}}" class="btn animate">Comprar</a>
+                                    </div>
+                                </div>
+                            @endauth
+                            <!--/ End Shopping Item -->
                         </div>
                     </div>
                 </div>
