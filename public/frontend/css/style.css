@@ -1839,7 +1839,7 @@ Version:1.0
 .single-product .product-img .product-action {
 	display: inline-block;
 	position: absolute;
-	right: 10;
+	right: 10px;
 	bottom: 0;
 	z-index: 99;
 	border-radius: 3px;

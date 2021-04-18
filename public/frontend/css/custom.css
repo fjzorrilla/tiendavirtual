@@ -3518,6 +3518,7 @@ figure.snip0015 {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
 }
 figure.snip0015 * {
   -webkit-box-sizing: border-box;
@@ -3608,6 +3609,7 @@ figure.snip0015:hover figcaption::before {
   opacity: 1;
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
+  border-radius:150px;
 }
 .sectionsearch{
   padding-top: 55px;

@@ -4,6 +4,7 @@
 
 @include('frontend.productdogcat')
 <!-- Slider Area -->
+
 {{--<section>
     <div class="container">
     <br>
@@ -282,86 +283,69 @@
 
 
 <!-- Start Shop Services Area -->
-<section class="shop-services section home">
-    <div class="container">
-     <div class="row">
-            <div class="col-12">
-                <div class="section-title">
-                    <h2>Más Vendidos</h2>
+<!-- Start Most Popular -->
+<div class="product-area most-popular section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-title">
+          <h2>Más Vendidos</h2>
+        </div>
+      </div>
+    </div>
+    @php
+        $product_lists=DB::table('products')->where('status','active')->orderBy('id','DESC')->get();
+    @endphp
+    <div class="row">
+      <div class="col-12">
+        <div class="owl-carousel popular-slider">
+          <!-- Start Single Product -->
+          @foreach($product_lists as $key => $product)
+            <div class="single-product">
+              <div class="product-img">
+                <a href="product-details.html">
+                  @php
+                      $photo=explode(',',$product->photo);
+                      //dd($photo[0]);
+                  @endphp
+                  <img class="default-img" src="{{$photo[0]}}" alt="#">
+                  <img class="hover-img" src="{{$photo[0]}}" alt="#">
+                  @if($product->discount > 0)
+                    <span class="out-of-stock">Oferta {{$product->discount}}%</span>
+                  @else
+                    <span>${{$product->price}}</span>
+                  @endif
+                </a>
+                <div class="button-head">
+                  <div class="product-action">
+                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Ver</span></a>
+                    
+                  </div>
+                  <div class="product-action-2">
+                    <a title="Add to cart" href="#">a Carrito</a>
+                  </div>
                 </div>
+              </div>
+              <div class="product-content">
+                <h3><a href="product-details.html">{{ $product->title}}</a></h3>
+                <div class="product-price">
+                  @if($product->discount > 0)
+                    <span class="old">${{$product->price}}</span>
+                    <span>${{$product->price - (($product->price * $product->discount) / 100)}}</span>
+                  @else
+                    <span>${{$product->price}}</span>
+                  @endif
+                </div>
+              </div>
             </div>
-        </div>
-<div id="carousel" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="row">
-        <div class="col">
-          <div class="py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider2.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class=" py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider3.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class="py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider4.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class=" py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider5.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class=" py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider6.jpg') }}"></div>
+          @endforeach
+          <!-- End Single Product -->
         </div>
       </div>
     </div>
-    <div class="carousel-item">
-      <div class="row">
-        <div class="col">
-          <div class="py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider2.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class="py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider3.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class=" py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider4.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class="py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider5.jpg') }}"></div>
-        </div>
-        <div class="col">
-          <div class="py-4 text-white text-center"><img class="card-img-top" src="{{ asset('img/slider6.jpg') }}"></div>
-        </div>
-      </div>
-    </div>
-    <!--<div class="carousel-item">
-      <div class="row">
-        <div class="col">
-          <div class="bg-secondary py-4 text-white text-center">11</div>
-        </div>
-        <div class="col">
-          <div class="bg-secondary py-4 text-white text-center">12</div>
-        </div>
-        <div class="col">
-          <div class="bg-secondary py-4 text-white text-center">13</div>
-        </div>
-        <div class="col">
-          <div class="bg-secondary py-4 text-white text-center">14</div>
-        </div>
-        <div class="col">
-          <div class="bg-secondary py-4 text-white text-center">15</div>
-        </div>
-      </div>
-    </div>-->
   </div>
-  <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
 </div>
-</div>
-</section>
+  <!-- End Most Popular Area -->
 <!-- End Shop Services Area -->
 
 @include('frontend.layouts.newsletter')
