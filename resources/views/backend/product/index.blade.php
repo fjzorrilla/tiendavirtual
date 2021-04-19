@@ -69,8 +69,12 @@
                       </sub>
                     </td>
                     <td>{{(($product->is_featured==1)? 'Si': 'No')}}</td>
-                    <td>Rs. {{$product->price}} /-</td>
-                    <td>  {{$product->discount}}% OFF</td>
+                    @if($product->discount > 0)
+                      <td><span style="text-decoration: line-through;">{{$product->price}}</span> / {{$product->price - ($product->price * $product->discount) / 100}}</td>
+                    @else
+                      <td>{{$product->price}}</td>
+                    @endif
+                    <td>{{$product->discount}}%</td>
                     <td>{{$product->size}}</td>
                     <td>{{$product->condition}}</td>
                     <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>

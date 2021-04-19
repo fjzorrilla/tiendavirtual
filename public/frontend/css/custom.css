@@ -3339,11 +3339,11 @@ div.numberStep:before{
 .product-area.shop-sidebar.shop.section{
   padding: 40px 0px;
 }
-.right-content.main .list-main{
+.left-content.main .list-main{
     padding-top: 18px;
     margin-bottom: 0px !important;
 }
-.right-content.main .total-count {
+.left-content.main .total-count {
     position: absolute;
     top: 14px;
     right: 8px;
@@ -3610,6 +3610,7 @@ figure.snip0015:hover figcaption::before {
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
   border-radius:150px;
+  border: 2px solid;
 }
 .sectionsearch{
   padding-top: 55px;
@@ -3641,4 +3642,7 @@ figure.snip0015:hover figcaption::before {
 .header.shop.sticky .total-count {
     background: orange;
     color: white;
+}
+.left-content{
+  float: left;
 }

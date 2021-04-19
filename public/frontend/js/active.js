@@ -61,11 +61,11 @@ window.onload = () => {
 			if ($(this).scrollTop() > 200) {
 				$('.header').addClass("sticky");
 				$(".logo.main").removeClass("hide")
-				$(".right-content.main").removeClass("hide")
+				$(".left-content.main").removeClass("hide")
 			} else {
 				$('.header').removeClass("sticky");
 				$(".logo.main").addClass("hide")
-				$(".right-content.main").addClass("hide")
+				$(".left-content.main").addClass("hide")
 			}
 		});
 		

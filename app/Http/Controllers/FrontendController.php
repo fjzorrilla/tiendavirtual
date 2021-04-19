@@ -15,7 +15,7 @@ use Session;
 use Newsletter;
 use DB;
 use Hash;
-use Illuminate\Support\Str;
+use Illuminate\Support\Str; 
 use Illuminate\Http\Request;
 class FrontendController extends Controller
 {
@@ -101,6 +101,20 @@ class FrontendController extends Controller
 
       
         return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
+    }
+    public function productOferts(){
+      
+        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
+        // Sort by number
+        if(!empty($_GET['show'])){
+            $products=Product::where('status','active')->where('discount','> 0')->paginate($_GET['show']);
+        }
+        else{
+            $products=Product::where('status','active')->paginate(9);
+        }
+        // Sort by name , price, category
+
+        return view('frontend.pages.product-ofertas')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productLists(){
         $products=Product::query();

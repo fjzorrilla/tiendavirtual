@@ -60,6 +60,7 @@ Route::get('order/pdf/{id}','OrderController@pdf')->name('order.pdf');
 Route::get('/income','OrderController@incomeChart')->name('product.order.income');
 // Route::get('/user/chart','AdminController@userPieChart')->name('user.piechart');
 Route::get('/product-grids','FrontendController@productGrids')->name('product-grids');
+Route::get('/product-oferts','FrontendController@productOferts')->name('product-oferts');
 Route::get('/product-lists','FrontendController@productLists')->name('product-lists');
 Route::match(['get','post'],'/filter','FrontendController@productFilter')->name('shop.filter');
 // Order Track
