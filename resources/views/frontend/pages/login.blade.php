@@ -11,7 +11,7 @@
                     <div class="bread-inner">
                         <ul class="bread-list">
                             <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-                            <li class="active"><a href="javascript:void(0);">Login</a></li>
+                            <li class="active"><a href="javascript:void(0);">Iniciar Sesion</a></li>
                         </ul>
                     </div>
                 </div>
@@ -19,22 +19,22 @@
         </div>
     </div>
     <!-- End Breadcrumbs -->
-            
+
     <!-- Shop Login -->
     <section class="shop login section">
         <div class="container">
-            <div class="row"> 
+            <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-12">
                     <div class="login-form">
-                        <h2>Login</h2>
-                        <p>Please register in order to checkout more quickly</p>
+                        <h2>Iniciar Sesion</h2>
+                        <p>Regístrese para pagar más rápidamente</p>
                         <!-- Form -->
                         <form class="form" method="post" action="{{route('login.submit')}}">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Email<span>*</span></label>
+                                        <label>Correo Electrónico<span>*</span></label>
                                         <input type="email" name="email" placeholder="" required="required" value="{{old('email')}}">
                                         @error('email')
                                             <span class="text-danger">{{$message}}</span>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>Your Password<span>*</span></label>
+                                        <label>Contraseña<span>*</span></label>
                                         <input type="password" name="password" placeholder="" required="required" value="{{old('password')}}">
                                         @error('password')
                                             <span class="text-danger">{{$message}}</span>
@@ -52,20 +52,20 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group login-btn">
-                                        <button class="btn" type="submit">Login</button>
-                                        <a href="{{route('register.form')}}" class="btn">Register</a>
-                                        OR
+                                        <button class="btn" type="submit">Iniciar Sesion</button>
+                                        <a href="{{route('register.form')}}" class="btn">Registrar</a>
+                                        O
                                         <a href="{{route('login.redirect','facebook')}}" class="btn btn-facebook"><i class="ti-facebook"></i></a>
-                                        <a href="{{route('login.redirect','github')}}" class="btn btn-github"><i class="ti-github"></i></a>
+                                        <!--<a href="{{route('login.redirect','github')}}" class="btn btn-github"><i class="ti-github"></i></a>-->
                                         <a href="{{route('login.redirect','google')}}" class="btn btn-google"><i class="ti-google"></i></a>
 
                                     </div>
                                     <div class="checkbox">
-                                        <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Remember me</label>
+                                        <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Recuérdame</label>
                                     </div>
                                     @if (Route::has('password.request'))
                                         <a class="lost-pass" href="{{ route('password.reset') }}">
-                                            Lost your password?
+                                            ¿Perdiste tu contraseña?
                                         </a>
                                     @endif
                                 </div>
