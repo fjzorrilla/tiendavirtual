@@ -148,7 +148,10 @@
 				$(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
 				$('.dropdown-submenu .show').removeClass("show");
 				});
-
 			});
+				let redesosciale = `<div class="st-btn" data-network="instagram" style="display: inline-block;">
+									  <img alt="instagram sharing button" src="https://platform-cdn.sharethis.com/img/instagram.svg">
+									</div>`
+				$(".sharethis-inline-follow-buttons").append(redesosciale)
 		});
 	  </script>

@@ -30,6 +30,9 @@ class Category extends Model
     public static function getAllParentWithChild(){ 
         return Category::with('child_cat')->where('is_parent',1)->where('status','active')->orderBy('title','ASC')->get();
     }
+    public static function getChildByParentIDSLECT($id){
+        return Category::where('is_parent',0)->orderBy('id','ASC')->pluck('title','id');
+    }
     public function products(){
         return $this->hasMany('App\Models\Product','cat_id','id')->where('status','active');
     }
