@@ -209,7 +209,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                    <h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
+                                    <h4 class="text-warning" style="margin:100px auto;">No existen productos para mostrar.</h4>
                             @endif
                             
 

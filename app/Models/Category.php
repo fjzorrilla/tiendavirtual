@@ -19,13 +19,15 @@ class Category extends Model
         return Category::whereIn('id',$cat_id)->update(['is_parent'=>1]);
     }
     public static function getChildByParentID($id){
-        return Category::where('parent_id',$id)->orderBy('id','ASC')->pluck('title','id');
+        return Category::orderBy('id','ASC')->pluck('title','id');
     }
-
+    public static function getChildByParentIDMain($id){
+        return Category::where('parent_id',$id)->orderBy('id','ASC')->get();
+    }
     public function child_cat(){
         return $this->hasMany('App\Models\Category','parent_id','id')->where('status','active');
     }
-    public static function getAllParentWithChild(){
+    public static function getAllParentWithChild(){ 
         return Category::with('child_cat')->where('is_parent',1)->where('status','active')->orderBy('title','ASC')->get();
     }
     public function products(){

@@ -32,31 +32,56 @@
                                 <div class="single-widget category">
                                     <h3 class="title">Categories</h3>
                                     <ul class="categor-list">
-										@php
-											// $category = new Category();
-											$menu=App\Models\Category::getAllParentWithChild();
-										@endphp
-										@if($menu)
-										<li>
-											@foreach($menu as $cat_info)
-													@if($cat_info->child_cat->count()>0)
-														<li><a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
-															<ul>
-																@foreach($cat_info->child_cat as $sub_menu)
-																	<li><a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug])}}">{{$sub_menu->title}}</a></li>
-																@endforeach
-															</ul>
-														</li>
-													@else
-														<li><a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a></li>
-													@endif
-											@endforeach
-										</li>
-										@endif
+                                        @php
+                                            // $category = new Category();
+                                            $menu=App\Models\Category::getAllParentWithChild();
+                                            //dd($menu);
+                                        @endphp
+                                        @if($menu)
+                                        <li>
+                                            @foreach($menu as $cat_info)
+                                                    @if($cat_info->child_cat->count()>0)
+                                                        <li>
+                                                            - <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
+                                                            <ul>
+                                                                @foreach($cat_info->child_cat as $sub_menu)
+                                                                    @php
+                                                                        $submenu=App\Models\Category::getChildByParentIDMain($sub_menu->id);
+                                                                    @endphp
+                                                                    @if($menu)  
+                                                                        <li>
+                                                                            - <a href="{{route('product-cat',$sub_menu->slug)}}">       
+                                                                                {{$sub_menu->title}}
+                                                                            </a>
+                                                                            <ul>
+                                                                                @foreach($submenu as $sub_menus)
+                                                                                
+                                                                                    - <a href="{{route('product-sub-cat',[$sub_menu->slug,$sub_menus->slug])}}">       
+                                                                                        {{$sub_menus->title}}
+                                                                                    </a>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </li>
+                                                                    @else
+                                                                        <li>
+                                                                            - <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug])}}">       
+                                                                                {{$sub_menu->title}}
+                                                                            </a>
+                                                                        </li>
+                                                                    @endif
+                                                                @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    @else
+                                                        <li>- <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a></li>
+                                                    @endif
+                                            @endforeach
+                                        </li>
+                                        @endif
                                         {{-- @foreach(Helper::productCategoryList('products') as $cat)
                                             @if($cat->is_parent==1)
-												<li><a href="{{route('product-cat',$cat->slug)}}">{{$cat->title}}</a></li>
-											@endif
+                                                <li><a href="{{route('product-cat',$cat->slug)}}">{{$cat->title}}</a></li>
+                                            @endif
                                         @endforeach --}}
                                     </ul>
                                 </div>
@@ -209,7 +234,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                    <h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
+                                    <h4 class="text-warning" style="margin:100px auto;">No existen productos para mostrar.</h4>
                             @endif
                             
 
