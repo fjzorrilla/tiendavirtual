@@ -112,7 +112,7 @@
                                             <li class="{{Request::path()=='home' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>
                                             <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Más Vendidos</a>{{--<span class="new">New</span>--}}</li>
                                             <li class="@if(Request::path()=='product-oferts'||Request::path()=='product-oferts')  active  @endif"><a href="{{route('product-oferts')}}">Ofertas</a></li>
-                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Humano / Mascota</a>{{--<span class="new">New</span>--}}</li>
+                                            <li class="@if(Request::path()=='humano-mascota'||Request::path()=='humano-mascota')  active  @endif"><a href="{{route('product-cat','humano-mascota')}}">Humano / Mascota</a>{{--<span class="new">New</span>--}}</li>
                                                 {{--Helper::getHeaderCategory()--}}
                                         </ul>
                                     </div>
