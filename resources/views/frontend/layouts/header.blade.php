@@ -1,3 +1,4 @@
+
 <header class="header shop">
     <!-- Topbar -->
     <div class="topbar">
@@ -104,21 +105,51 @@
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="menu-area">
-                            <!-- Main Menu -->
-                            <nav class="navbar navbar-expand-lg">
-                                <div class="navbar-collapse">
-                                    <div class="nav-inner">
-                                        <ul class="nav main-menu menu navbar-nav">
-                                            <li class="{{Request::path()=='home' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>
-                                            <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Más Vendidos</a>{{--<span class="new">New</span>--}}</li>
-                                            <li class="@if(Request::path()=='product-oferts'||Request::path()=='product-oferts')  active  @endif"><a href="{{route('product-oferts')}}">Ofertas</a></li>
-                                            <li class="@if(Request::path()=='humano-mascota'||Request::path()=='humano-mascota')  active  @endif"><a href="{{route('product-cat','humano-mascota')}}">Humano / Mascota</a>{{--<span class="new">New</span>--}}</li>
-                                                {{--Helper::getHeaderCategory()--}}
+                            <div class="menu">
+                                <ul>
+                                  <li><a href="#">Inicio</a></li>
+                                  <li>
+                                    <a href="http://marioloncarek.com">Perros</a>
+                                    <ul>
+                                      <li><a href="#">Alimentos</a>
+                                        <ul>
+                                          <li><a href="#">Alimentos Secos</a></li>
                                         </ul>
-                                    </div>
-                                </div>
-                            </nav>
-                            <!--/ End Main Menu -->
+                                      </li>
+                                      <li>
+                                        
+                                      </li>
+                                      <li>
+                                        
+                                      </li>
+                                      <li>
+                                        <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                  <li>
+                                    <a href="http://marioloncarek.com">Gatos</a>
+                                    <ul>
+                                      <li><a href="#">Alimentos</a>
+                                        <ul>
+                                          <li><a href="#">Alimentos Secos</a></li>
+                                        </ul>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                  <li>
+                                    <a href="http://marioloncarek.com">Humano / Mascota</a>
+                                    <ul>
+                                      <li><a href="#">Alimentos</a>
+                                        <ul>
+                                          <li><a href="#">Alimentos Secos</a></li>
+                                        </ul>
+                                      </li>
+
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-12">
