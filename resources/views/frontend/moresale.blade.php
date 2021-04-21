@@ -17,7 +17,7 @@
           @foreach($product_lists as $key => $product)
             <div class="col-12 single-product">
               <div class="product-img">
-                <a href="product-details.html">
+                <a href="{{route('product-detail',$product->slug)}}">
                   @php
                       $photo=explode(',',$product->photo);
                       //dd($photo[0]);
@@ -40,7 +40,7 @@
                 </div>
               </div>
               <div class="product-content">
-                <h3><a href="product-details.html">{{ $product->title}}</a></h3>
+                <h3><a href="{{route('product-detail',$product->slug)}}">{{ $product->title}}</a></h3>
                 <div class="product-price">
                   @if($product->discount > 0)
                     <span class="old">${{$product->price}}</span>

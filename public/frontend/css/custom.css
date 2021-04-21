@@ -3845,3 +3845,12 @@ Mobile style's
     display: block;
   }
 }
+.menu.home > ul > li a {
+    text-decoration: none;
+    padding: 1em 1rem;
+    display: block;
+    color: white;
+}
+.header.sticky .menu.home > ul > li a{
+  color: black;
+}
