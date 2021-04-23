@@ -3867,3 +3867,9 @@ Mobile style's
 .menu-area li.active{
   background: orange;
 }
+.sticky .menu > ul > li a {
+  color: orange;
+}
+.sticky .menu > ul > li.active a {
+  color: white;
+}
