@@ -31,7 +31,7 @@ Version:1.0
 [End Activation Code]
 =========================================*/ 
 $(document).ready(function() {
-
+ 
   "use strict";
 
   $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
@@ -46,7 +46,12 @@ $(document).ready(function() {
   //Mobile menu is hidden if width is more then 959px, but normal menu is displayed
   //Normal menu is hidden if width is below 959px, and jquery adds mobile menu
   //Done this way so it can be used with wordpress without any trouble
-
+  $(".right-content.sinlge-bar.shopping a").click(function(){
+  	$(".right-content.sinlge-bar.shopping .shopping-item").addClass("visible")
+  })
+  $(".closeCart").click(function(){
+  	$(".right-content.sinlge-bar.shopping .shopping-item").removeClass("visible")
+  })
   $(".menu > ul > li").hover(function(e) {
     if ($(window).width() > 943) {
       $(this).children("ul").stop(true, false).fadeToggle(150);

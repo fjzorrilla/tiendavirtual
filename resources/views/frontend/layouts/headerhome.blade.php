@@ -111,33 +111,117 @@
                                   <li>
                                     <a href="">Más Vendidos</a>
                                     <ul>
-                                      <li><a href="#">Productos</a>
+                                      <li>
                                         <ul>
                                           <li>
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
-
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      
                                     </ul>
                                   </li>
                                   <li>
                                     <a href="">Ofertas</a>
                                     <ul>
-                                      <li><a href="#">Productos</a>
+                                      <li>
                                         <ul>
                                           <li>
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
-
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      
                                     </ul>
                                   </li>
                                   <li>
                                     <a href="">Humano / Mascota</a>
                                     <ul>
-                                      <li><a href="#">Productos</a>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
                                         <ul>
                                           <li>
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
@@ -190,10 +274,13 @@
                             
                         </div>
                         <div class="right-content sinlge-bar shopping">
-                            <a href="{{route('cart')}}" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helper::cartCount()}}</span></a>
+                            <a href="javascript:void(0)" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helper::cartCount()}}</span></a>
                             <!-- Shopping Item -->
                             @auth
                                 <div class="shopping-item">
+                                    <div class="closeCart">
+                                       X     
+                                    </div>
                                     <div class="dropdown-cart-header">
                                         <span>{{count(Helper::getAllProductFromCart())}} Items</span>
                                         <a href="{{route('cart')}}">Ver Carrito</a>

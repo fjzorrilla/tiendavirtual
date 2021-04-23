@@ -3747,9 +3747,10 @@ Screen style's
   margin: 0;
   padding-bottom: 0;
   list-style: none;
-  width: 25%;
+  width: auto;
   background: none;
   float: left;
+  margin-right: 18px;
 }
 .menu > ul > li > ul > li a {
   color: #777;
@@ -3780,6 +3781,11 @@ Screen style's
   margin: 0;
   font-size: 0.8em;
 }
+.menu > ul > li > ul > li > ul > li img {
+  width: 135px;
+  border-radius: 15px;
+}
+
 .menu > ul > li > ul > li > ul > li a {
   border: 0;
 }
@@ -3853,4 +3859,8 @@ Mobile style's
 }
 .header.sticky .menu.home > ul > li a{
   color: black;
+}
+.categor-list li > ul, li > ol {
+    margin-bottom: 0;
+    margin-left: 1em;
 }

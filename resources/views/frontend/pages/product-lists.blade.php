@@ -12,7 +12,7 @@
 						<div class="bread-inner">
 							<ul class="bread-list">
 								<li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-								<li class="active"><a href="javascript:void(0);">Shop List</a></li>
+								<li class="active"><a href="javascript:void(0);">Lista de Productos</a></li>
 							</ul>
 						</div>
 					</div>
@@ -40,9 +40,10 @@
 										@if($menu)
 										<li>
 											@foreach($menu as $cat_info)
-													@if($cat_info->child_cat->count()>0)
+
+													@if($cat_info->child_cat->count()>0 && $cat_info->slug == 'perros')
 														<li>
-                                                            - <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
+                                                            <a href="#">{{$cat_info->title}}</a>
 															<ul>
 																@foreach($cat_info->child_cat as $sub_menu)
 																	@php
@@ -73,7 +74,9 @@
 															</ul>
 														</li>
 													@else
-														<li>- <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a></li>
+														@if($cat_info->slug == 'perros')
+															<a href="#">{{$cat_info->title}}</a>
+														@endif	
 													@endif
 											@endforeach
 										</li>
