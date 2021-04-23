@@ -111,16 +111,23 @@
                                   <li class="{{Request::path()=='product-cat/perros' ? 'active' : ''}}">
                                     <a href="#">Perros</a>
                                     <ul>
-                                      <li><a href="#">Alimentos</a>
+                                      <li>
+                                        <a href="#">Alimentos</a>
                                         <ul>
                                           <li><a href="#">Alimentos Secos</a></li>
                                         </ul>
                                       </li>
                                       <li>
-                                        
+                                        <a href="#">Cuidado e Higiene</a>
+                                        <ul>
+                                          <li><a href="#">Antipulgas</a></li>
+                                        </ul>
                                       </li>
                                       <li>
-                                        
+                                        <a href="#">Accesorios</a>
+                                        <ul>
+                                          <li><a href="#">Correas</a></li>
+                                        </ul>
                                       </li>
                                       <li>
                                         <img src="{{ asset('img/perro.png') }}" alt="sample38"/>

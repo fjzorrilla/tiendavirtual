@@ -3873,3 +3873,12 @@ Mobile style's
 .sticky .menu > ul > li.active a {
   color: white;
 }
+.header.shop .menu > ul > li > ul > li {
+    margin: 0;
+    padding-bottom: 0;
+    list-style: none;
+    width: 24%;
+    background: none;
+    float: left;
+    margin-right: 6px;
+}
