@@ -36,12 +36,14 @@
 											// $category = new Category();
 											$menu=App\Models\Category::getAllParentWithChild();
 											//dd($menu);
+											$parametro = explode("/", Request::path())
+											
 										@endphp
 										@if($menu)
 										<li>
 											@foreach($menu as $cat_info)
 
-													@if($cat_info->child_cat->count()>0 && $cat_info->slug == 'perros')
+													@if($cat_info->child_cat->count()>0 && $cat_info->slug == $parametro[1])
 														<li>
                                                             <a href="#">{{$cat_info->title}}</a>
 															<ul>
@@ -74,7 +76,7 @@
 															</ul>
 														</li>
 													@else
-														@if($cat_info->slug == 'perros')
+														@if($cat_info->slug == $parametro[1])
 															<a href="#">{{$cat_info->title}}</a>
 														@endif	
 													@endif

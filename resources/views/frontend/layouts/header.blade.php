@@ -108,7 +108,7 @@
                             <div class="menu">
                                 <ul>
                                   <li><a href="/">Inicio</a></li>
-                                  <li>
+                                  <li class="{{Request::path()=='product-cat/perros' ? 'active' : ''}}">
                                     <a href="#">Perros</a>
                                     <ul>
                                       <li><a href="#">Alimentos</a>
@@ -127,7 +127,7 @@
                                       </li>
                                     </ul>
                                   </li>
-                                  <li>
+                                  <li  class="{{Request::path()=='product-cat/gatos' ? 'active' : ''}}">
                                     <a href="#">Gatos</a>
                                     <ul>
                                       <li><a href="#">Alimentos</a>
@@ -137,7 +137,7 @@
                                       </li>
                                     </ul>
                                   </li>
-                                  <li>
+                                  <li  class="{{Request::path()=='product-cat/humano-mascota' ? 'active' : ''}}">
                                     <a href="#">Humano / Mascota</a>
                                     <ul>
                                       <li><a href="#">Alimentos</a>
