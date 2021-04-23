@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Wishlist;
 use App\Models\Shipping;
 use App\Models\Cart;
+use App\Models\Product;
 // use Auth;
 class Helper{
     public static function messageList()
@@ -172,6 +173,9 @@ class Helper{
 
     public static function shipping(){
         return Shipping::orderBy('id','DESC')->get();
+    }
+    public static function productDetails($id){
+        return Product::where('id',$id)->get();
     }
 }
 

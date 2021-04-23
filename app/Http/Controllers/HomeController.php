@@ -8,7 +8,8 @@ use App\Models\Order;
 use App\Models\ProductReview;
 use App\Models\PostComment;
 use App\Rules\MatchOldPassword;
-use Hash;
+use Hash; 
+use Helper;
 
 class HomeController extends Controller
 {
@@ -86,7 +87,8 @@ class HomeController extends Controller
     {
         $order=Order::find($id);
         // return $order;
-        return view('user.order.show')->with('order',$order);
+        $orderDetail = $this->orderDetail($id);
+        return view('user.order.show')->with('order',$order)->with('detail',$orderDetail);
     }
     // Product Review
     public function productReviewIndex(){
@@ -225,6 +227,22 @@ class HomeController extends Controller
    
         return redirect()->route('user')->with('success','Password successfully changed');
     }
-
+    public function orderDetail($id)
+    {
+        $order=Order::getAllOrder($id);
+        $arrat_product = [];
+        foreach ($order->cart_info as $key => $product) {
+            $productList = [
+                'id' => $product["product_id"],
+                'title' => Helper::productDetails($product["product_id"])[0]->title,
+                'photo' => Helper::productDetails($product["product_id"])[0]->photo,
+                'size' => Helper::productDetails($product["product_id"])[0]->size,
+                'cantidad' => $product['quantity'],
+                'price' => $product['price']  
+            ];
+            array_push($arrat_product, $productList);
+        }
+        return $arrat_product;
+    }
     
 }

@@ -161,7 +161,9 @@ class OrderController extends Controller
     {
         $order=Order::find($id);
         // return $order;
-        return view('backend.order.show')->with('order',$order);
+        $orderDetail = $this->orderDetail($id); 
+
+        return view('backend.order.show')->with('order',$order)->with('detail',$orderDetail);
     }
 
     /**
@@ -303,5 +305,22 @@ class OrderController extends Controller
             $data[$monthName] = (!empty($result[$i]))? number_format((float)($result[$i]), 2, '.', '') : 0.0;
         }
         return $data;
+    }
+    public function orderDetail($id)
+    {
+        $order=Order::getAllOrder($id);
+        $arrat_product = [];
+        foreach ($order->cart_info as $key => $product) {
+            $productList = [
+                'id' => $product["product_id"],
+                'title' => Helper::productDetails($product["product_id"])[0]->title,
+                'photo' => Helper::productDetails($product["product_id"])[0]->photo,
+                'size' => Helper::productDetails($product["product_id"])[0]->size,
+                'cantidad' => $product['quantity'],
+                'price' => $product['price']  
+            ];
+            array_push($arrat_product, $productList);
+        }
+        return $arrat_product;
     }
 }

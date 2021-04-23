@@ -104,11 +104,32 @@
                         <td>Payment Status</td>
                         <td> : {{$order->payment_status}}</td>
                     </tr>
+                  </table>
+                  <br>
+                  
+            </div>
+          </div>
+          <div class="col-lg-6 col-lx-4">
+            <div class="shipping-info">
+              <h4 class="text-center pb-4">DETALLE DEL PEDIDO</h4>
+              <table class="table">
+                @foreach($detail as $key => $product) 
+                  <tr>
+                    <td>
+                      <img src="{{asset($product['photo'])}}" style="width: 80px;">
+                    </td>
+                    <td class="center">
+                      <strong>Producto:</strong> {{$product['title']}}<br>
+                      <strong>Precio:</strong> {{$product['price']}}<br>
+                      <strong>Cantidad:</strong> {{$product['cantidad']}}
+                    </td>
+                  </tr>
+                @endforeach
+                
               </table>
             </div>
           </div>
-
-          <div class="col-lg-6 col-lx-4">
+          <div class="col-lg-6 col-lx-4 mt-3">
             <div class="shipping-info">
               <h4 class="text-center pb-4">INFORMACIÓN DE ENVÍO</h4>
               <table class="table">
@@ -139,6 +160,7 @@
               </table>
             </div>
           </div>
+
         </div>
       </div>
     </section>
