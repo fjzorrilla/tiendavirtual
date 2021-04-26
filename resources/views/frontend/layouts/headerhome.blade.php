@@ -14,14 +14,14 @@
                             @endphp
                             {{--<li>
                                 <i class="ti-headphone-alt"></i>
-                                    @foreach($settings as $data) 
-                                        {{$data->phone}} 
+                                    @foreach($settings as $data)
+                                        {{$data->phone}}
                                     @endforeach
                             </li>
                             <li>
-                                <i class="ti-email"></i> 
-                                    @foreach($settings as $data) 
-                                        {{$data->email}} 
+                                <i class="ti-email"></i>
+                                    @foreach($settings as $data)
+                                        {{$data->email}}
                                     @endforeach
                             </li>--}}
                         </ul>
@@ -82,9 +82,9 @@
                     <div class="mobile-nav"></div>
                 </div>
                 <div class="col-lg-9 col-md-9 col-12">
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -114,11 +114,25 @@
                                       <li>
                                         <ul>
                                           <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                            <img src="{{ asset('img/a1.jpg') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
                                       <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/a2.png') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/a3.jpg') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                     <!-- <li>
                                         <ul>
                                           <li>
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
@@ -131,22 +145,8 @@
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      
+                                      </li>-->
+
                                     </ul>
                                   </li>
                                   <li>
@@ -155,11 +155,25 @@
                                       <li>
                                         <ul>
                                           <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                            <img src="{{ asset('img/a4.jpg') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
                                       <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/a5.jpg') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <li>
+                                        <ul>
+                                          <li>
+                                            <img src="{{ asset('img/a6.jpg') }}" alt="sample38"/>
+                                          </li>
+                                        </ul>
+                                      </li>
+                                      <!--<li>
                                         <ul>
                                           <li>
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
@@ -172,22 +186,8 @@
                                             <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      
+                                      </li>-->
+
                                     </ul>
                                   </li>
                                   <li>
@@ -196,35 +196,21 @@
                                       <li>
                                         <ul>
                                           <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                            <img src="{{ asset('img/humano_mascota1.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
                                       <li>
                                         <ul>
                                           <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                            <img src="{{ asset('img/humano_mascota2.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
                                       <li>
                                         <ul>
                                           <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
+                                            <img src="{{ asset('img/humano_mascota3.png') }}" alt="sample38"/>
                                           </li>
                                         </ul>
                                       </li>
@@ -244,34 +230,34 @@
                                     @if(Auth::user()->role=='admin')
                                        <!-- <li><i class="ti-user"></i> <a href="{{route('admin')}}"  target="_blank">Dashboard</a></li>-->
                                     @else
-                                        <li> 
+                                        <li>
                                             <a href="{{route('order.track')}}" title="Ordenes">
                                                 <i class="ti-location-pin"></i></a>
                                         </li>
                                         <li>
-                                             
+
                                             <a href="{{route('user')}}"  target="_blank" title="Perfil">
                                                 <i class="ti-user"></i></a>
                                         </li>
                                         <li>
-                                            
+
                                             <a href="{{route('user.logout')}}" title="Cerrar Sesión">
-                                                <i class="ti-power-off"></i> 
+                                                <i class="ti-power-off"></i>
                                             </a>
                                         </li>
                                     @endif
-                                    
-                                    
+
+
 
                                 @else
                                     <li>
                                         <i class="ti-power-off"></i>
-                                            <a href="{{route('login.form')}}">Iniciar Sesión /</a> 
+                                            <a href="{{route('login.form')}}">Iniciar Sesión /</a>
                                             <a href="{{route('register.form')}}">Registrar</a>
                                         </li>
                                 @endauth
                             </ul>
-                            
+
                         </div>
                         <div class="right-content sinlge-bar shopping">
                             <a href="javascript:void(0)" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helper::cartCount()}}</span></a>
@@ -279,7 +265,7 @@
                             @auth
                                 <div class="shopping-item">
                                     <div class="closeCart">
-                                       X     
+                                       X
                                     </div>
                                     <div class="dropdown-cart-header">
                                         <span>{{count(Helper::getAllProductFromCart())}} Items</span>

@@ -9,8 +9,8 @@
          </div>
      </div>
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary float-left">Shipping List</h6>
-      <a href="{{route('shipping.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Add Shipping</a>
+      <h6 class="m-0 font-weight-bold text-primary float-left">Lista Transportes</h6>
+      <a href="{{route('shipping.create')}}" class="btn btn-primary btn-sm float-right" data-toggle="tooltip" data-placement="bottom" title="Add User"><i class="fas fa-plus"></i> Agregar Transportes</a>
     </div>
     <div class="card-body">
       <div class="table-responsive">
@@ -19,27 +19,27 @@
           <thead>
             <tr>
               <th>S.N.</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Nombre Distrito</th>
+              <th>Precio-Delivery</th>
+              <th>Estatus</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>S.N.</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Action</th>
+              <th>Distrito</th>
+              <th>Precio-Delivery</th>
+              <th>Estatus</th>
+              <th>Acción</th>
               </tr>
           </tfoot>
           <tbody>
-            @foreach($shippings as $shipping)   
+            @foreach($shippings as $shipping)
                 <tr>
                     <td>{{$shipping->id}}</td>
                     <td>{{$shipping->type}}</td>
-                    <td>${{$shipping->price}}</td>
+                    <td>S/{{$shipping->price}}</td>
                     <td>
                         @if($shipping->status=='active')
                             <span class="badge badge-success">{{$shipping->status}}</span>
@@ -50,7 +50,7 @@
                     <td>
                         <a href="{{route('shipping.edit',$shipping->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                         <form method="POST" action="{{route('shipping.destroy',[$shipping->id])}}">
-                          @csrf 
+                          @csrf
                           @method('delete')
                               <button class="btn btn-danger btn-sm dltBtn" data-id={{$shipping->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
                         </form>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" action="{{ route('banners.destroy',$user->id) }}">
-                                @csrf 
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
                               </form>
@@ -75,13 +75,13 @@
                           </div>
                         </div>
                     </div> --}}
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
         <span style="float:right">{{$shippings->links()}}</span>
         @else
-          <h6 class="text-center">No shippings found!!! Please create shipping</h6>
+          <h6 class="text-center">¡No se encontraron envíos! Por favor crea envío</h6>
         @endif
       </div>
     </div>
@@ -115,7 +115,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
+
       $('#banner-dataTable').DataTable( {
             "columnDefs":[
                 {
@@ -128,7 +128,7 @@
         // Sweet alert
 
         function deleteData(id){
-            
+
         }
   </script>
   <script>

@@ -168,7 +168,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        MercadoPagoLaravel\Providers\MercadoPagoServiceProvider::class,
+      //  MercadoPagoLaravel\Providers\MercadoPagoServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -238,7 +238,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'MP' => MercadoPagoLaravel\Facades\MP::class,
+        //'MP' => MercadoPagoLaravel\Facades\MP::class,
 
     ],
 

@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','Cart Page')
+@section('title','Página del carrito')
 @section('main-content')
 	<!-- Breadcrumbs -->
 	<div class="breadcrumbs">
@@ -8,8 +8,8 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="{{('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="">Cart</a></li>
+							<li><a href="{{('home')}}">Inicio<i class="ti-arrow-right"></i></a></li>
+							<li class="active"><a href="">Carrito</a></li>
 						</ul>
 					</div>
 				</div>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<!-- End Breadcrumbs -->
-			
+
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section">
 		<div class="container">
@@ -27,12 +27,12 @@
 					<table class="table shopping-summery">
 						<thead>
 							<tr class="main-hading">
-								<th>PRODUCT</th>
-								<th>NAME</th>
-								<th class="text-center">UNIT PRICE</th>
-								<th class="text-center">QUANTITY</th>
-								<th class="text-center">TOTAL</th> 
-								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
+								<th>PRODUCTO</th>
+								<th>DESCRIPCIÓN</th>
+								<th class="text-center">PRECIO</th>
+								<th class="text-center">CANTIDAD</th>
+								<th class="text-center">TOTAL</th>
+								<th class="text-center"><i class="ti-trash remove-icon" title="Eliminar"></i></th>
 							</tr>
 						</thead>
 						<tbody id="cart_item_list">
@@ -41,7 +41,7 @@
 								@if(Helper::getAllProductFromCart())
 									@foreach(Helper::getAllProductFromCart() as $key=>$cart)
 										<tr>
-											@php 
+											@php
 											$photo=explode(',',$cart->product['photo']);
 											@endphp
 											<td class="image" data-title="No"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></td>
@@ -49,7 +49,7 @@
 												<p class="product-name"><a href="{{route('product-detail',$cart->product['slug'])}}" target="_blank">{{$cart->product['title']}}</a></p>
 												<p class="product-des">{!!($cart['summary']) !!}</p>
 											</td>
-											<td class="price" data-title="Price"><span>${{number_format($cart['price'],2)}}</span></td>
+											<td class="price" data-title="Price"><span>S/{{number_format($cart['price'],2)}}</span></td>
 											<td class="qty" data-title="Qty"><!-- Input Order -->
 												<div class="input-group">
 													<div class="button minus">
@@ -67,8 +67,8 @@
 												</div>
 												<!--/ End Input Order -->
 											</td>
-											<td class="total-amount cart_single_price" data-title="Total"><span class="money">${{$cart['amount']}}</span></td>
-											
+											<td class="total-amount cart_single_price" data-title="Total"><span class="money">S/{{$cart['amount']}}</span></td>
+
 											<td class="action" data-title="Remove"><a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a></td>
 										</tr>
 									@endforeach
@@ -79,18 +79,18 @@
 										<td></td>
 										<td></td>
 										<td class="float-right">
-											<button class="btn float-right" type="submit">Update</button>
+											<button class="btn float-right" type="submit">Actualizar</button>
 										</td>
 									</track>
-								@else 
+								@else
 										<tr>
 											<td class="text-center">
-												There are no any carts available. <a href="{{route('product-grids')}}" style="color:blue;">Continue shopping</a>
+												No hay carritos disponibles. <a href="{{route('product-grids')}}" style="color:blue;">Seguir comprando</a>
 
 											</td>
 										</tr>
 								@endif
-								
+
 							</form>
 						</tbody>
 					</table>
@@ -107,12 +107,12 @@
 									<div class="coupon">
 									<form action="{{route('coupon-store')}}" method="POST">
 											@csrf
-											<input name="code" placeholder="Enter Your Coupon">
-											<button class="btn">Apply</button>
+											<input name="code" placeholder="Ingrese su cupón">
+											<button class="btn">Aplicar</button>
 										</form>
 									</div>
 									{{-- <div class="checkbox">`
-										@php 
+										@php
 											$shipping=DB::table('shippings')->where('status','active')->limit(1)->get();
 										@endphp
 										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox" onchange="showMe('shipping');"> Shipping</label>
@@ -122,7 +122,7 @@
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Cart Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span></li>
+										<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Sub total<span>S/{{number_format(Helper::totalCartPrice(),2)}}</span></li>
 										{{-- <div id="shipping" style="display:none;">
 											<li class="shipping">
 												Shipping {{session('shipping_price')}}
@@ -135,7 +135,7 @@
 															@endforeach
 														</select>
 													</div>
-												@else 
+												@else
 													<div class="form-select">
 														<span>Free</span>
 													</div>
@@ -145,7 +145,7 @@
 										 --}}
 										 {{-- {{dd(Session::get('coupon')['value'])}} --}}
 										@if(session()->has('coupon'))
-										<li class="coupon_price" data-price="{{Session::get('coupon')['value']}}">You Save<span>${{number_format(Session::get('coupon')['value'],2)}}</span></li>
+										<li class="coupon_price" data-price="{{Session::get('coupon')['value']}}">Ahorras<span>S/{{number_format(Session::get('coupon')['value'],2)}}</span></li>
 										@endif
 										@php
 											$total_amount=Helper::totalCartPrice();
@@ -154,14 +154,14 @@
 											}
 										@endphp
 										@if(session()->has('coupon'))
-											<li class="last" id="order_total_price">You Pay<span>${{number_format($total_amount,2)}}</span></li>
+											<li class="last" id="order_total_price">Total<span>S/{{number_format($total_amount,2)}}</span></li>
 										@else
-											<li class="last" id="order_total_price">You Pay<span>${{number_format($total_amount,2)}}</span></li>
+											<li class="last" id="order_total_price">Total<span>S/{{number_format($total_amount,2)}}</span></li>
 										@endif
 									</ul>
 									<div class="button5">
-										<a href="{{route('checkout')}}" class="btn">Checkout</a>
-										<a href="{{route('product-grids')}}" class="btn">Continue shopping</a>
+										<a href="{{route('checkout')}}" class="btn">Verificar</a>
+										<a href="{{route('product-grids')}}" class="btn">Seguir comprando</a>
 									</div>
 								</div>
 							</div>
@@ -173,7 +173,7 @@
 		</div>
 	</div>
 	<!--/ End Shopping Cart -->
-			
+
 	<!-- Start Shop Services Area  -->
 	<section class="shop-services section">
 		<div class="container">
@@ -218,13 +218,13 @@
 		</div>
 	</section>
 	<!-- End Shop Newsletter -->
-	
+
 	<!-- Start Shop Newsletter  -->
 	@include('frontend.layouts.newsletter')
 	<!-- End Shop Newsletter -->
-	
-	
-	
+
+
+
 	<!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -337,7 +337,7 @@
             </div>
         </div>
         <!-- Modal end -->
-	
+
 @endsection
 @push('styles')
 	<style>
@@ -393,8 +393,8 @@
 		$(document).ready(function(){
 			$('.shipping select[name=shipping]').change(function(){
 				let cost = parseFloat( $(this).find('option:selected').data('price') ) || 0;
-				let subtotal = parseFloat( $('.order_subtotal').data('price') ); 
-				let coupon = parseFloat( $('.coupon_price').data('price') ) || 0; 
+				let subtotal = parseFloat( $('.order_subtotal').data('price') );
+				let coupon = parseFloat( $('.coupon_price').data('price') ) || 0;
 				// alert(coupon);
 				$('#order_total_price span').text('$'+(subtotal + cost-coupon).toFixed(2));
 			});

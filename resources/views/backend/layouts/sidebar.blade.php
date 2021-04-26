@@ -38,7 +38,7 @@
             <span>Media Manager</span></a>
     </li>
 
-    <li class="nav-item">
+   <!-- <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-image"></i>
         <span>Banners</span>
@@ -50,7 +50,7 @@
           <a class="collapse-item" href="{{route('banner.create')}}">Agregar Banners</a>
         </div>
       </div>
-    </li>
+    </li>-->
     <!-- Divider -->
     <hr class="sidebar-divider">
         <!-- Heading -->
@@ -134,15 +134,15 @@
 
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+   <!-- <hr class="sidebar-divider">-->
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+   <!-- <div class="sidebar-heading">
       Posts
-    </div>
+    </div>-->
 
     <!-- Posts -->
-    <li class="nav-item">
+    <!--<li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#postCollapse" aria-expanded="true" aria-controls="postCollapse">
         <i class="fas fa-fw fa-folder"></i>
         <span>Posts</span>
@@ -154,7 +154,7 @@
           <a class="collapse-item" href="{{route('post.create')}}">Agregar Post</a>
         </div>
       </div>
-    </li>
+    </li>-->
 
      <!-- Category -->
     <!-- <li class="nav-item">
@@ -172,7 +172,7 @@
       </li>-->
 
       <!-- Tags -->
-    <li class="nav-item">
+    <!--<li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#tagCollapse" aria-expanded="true" aria-controls="tagCollapse">
             <i class="fas fa-tags fa-folder"></i>
             <span>Tags</span>
@@ -184,15 +184,15 @@
             <a class="collapse-item" href="{{route('post-tag.create')}}">Agregar Tag</a>
             </div>
         </div>
-    </li>
+    </li>-->
 
       <!-- Comments -->
-      <li class="nav-item">
+     <!-- <li class="nav-item">
         <a class="nav-link" href="{{route('comment.index')}}">
             <i class="fas fa-comments fa-chart-area"></i>
             <span>Comentarios</span>
         </a>
-      </li>
+      </li>-->
 
 
     <!-- Divider -->
