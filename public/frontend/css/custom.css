@@ -3854,3 +3854,15 @@ Mobile style's
 .header.sticky .menu.home > ul > li a{
   color: black;
 }
+.menu.category > ul > li a {
+    text-decoration: none;
+    padding: 1em 2rem;
+    display: block;
+    color: white;
+}
+.header.sticky .menu.category > ul > li a{
+  color: black;
+}
+.menu > ul > li > ul > li a {
+    color: #777 !important;
+}

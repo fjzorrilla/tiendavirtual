@@ -2,6 +2,7 @@
 <html lang="zxx">
 <head>
 	@include('frontend.layouts.head')	
+	<link rel="manifest" href="http://201.249.200.109/tienda/manifest.json">
 </head>
 <body class="js">
 	

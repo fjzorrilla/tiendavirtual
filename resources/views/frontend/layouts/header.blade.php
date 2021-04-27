@@ -105,11 +105,11 @@
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="menu-area">
-                            <div class="menu">
+                            <div class="menu category">
                                 <ul>
                                   <li><a href="#">Inicio</a></li>
                                   <li>
-                                    <a href="http://marioloncarek.com">Perros</a>
+                                    <a href="">Perros</a>
                                     <ul>
                                       <li><a href="#">Alimentos</a>
                                         <ul>
@@ -128,7 +128,7 @@
                                     </ul>
                                   </li>
                                   <li>
-                                    <a href="http://marioloncarek.com">Gatos</a>
+                                    <a href="">Gatos</a>
                                     <ul>
                                       <li><a href="#">Alimentos</a>
                                         <ul>
@@ -138,7 +138,7 @@
                                     </ul>
                                   </li>
                                   <li>
-                                    <a href="http://marioloncarek.com">Humano / Mascota</a>
+                                    <a href="">Humano / Mascota</a>
                                     <ul>
                                       <li><a href="#">Alimentos</a>
                                         <ul>
