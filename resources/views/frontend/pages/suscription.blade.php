@@ -45,7 +45,7 @@
 									@foreach($products as $product)
 									 	{{-- {{$product}} --}}
 										<!-- Start Single List -->
-										<div class="producto-card col-lg-4 col-md-6 col-12 {{$product->condition}}" style="{{$product->condition != 'default' ? 'display: none' : ''}}" >
+										<div class="producto-card col-lg-3 col-md-3 col-12 {{$product->condition}}" style="{{$product->condition != 'default' ? 'display: none' : ''}}" >
 	                                        <div class="single-product">
 	                                            <div class="product-img">
 	                                                <a href="{{route('product-detail',$product->slug)}}">
@@ -296,7 +296,7 @@
 	        }
 	        $("#condition").change(function(){
 	        	$(".producto-card").hide('fade')
-	        	
+
 	        	$(".producto-card."+$(this).val()).show('fade')
 	        })
         })
