@@ -296,8 +296,7 @@
 	        }
 	        $("#condition").change(function(){
 	        	$(".producto-card").hide('fade')
-
-	        	$(".producto-card."+$(this).val()).show('fade')
+	        	$("."+$(this).val()).show('fade')
 	        })
         })
 
