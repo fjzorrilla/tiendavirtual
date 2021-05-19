@@ -7,25 +7,27 @@
         </div>
       </div>
     </div>
-    @php
-        $product_lists=DB::table('products')->where('status','active')->orderBy('id','DESC')->get();
-    @endphp
+    
     <div class="row">
-      <div class="col-12">
+      <div class="col-12"> 
         <div class="owl-carousel popular-slider">
           <!-- Start Single Product -->
-          @foreach($product_lists as $key => $product)
+          @foreach($moresale[""] as $key => $product)
+         
+            @php
+              $product = Helper::productDetails($product);
+            @endphp
             <div class="col-12 single-product">
               <div class="product-img">
-                <a href="{{route('product-detail',$product->slug)}}">
+                <a href="{{route('product-detail',$product[0]->slug)}}">
                   @php
-                      $photo=explode(',',$product->photo);
+                      $photo=explode(',',$product[0]->photo);
                       //dd($photo[0]);
                   @endphp
                   <img class="default-img" src="{{$photo[0]}}" alt="#">
                   <img class="hover-img" src="{{$photo[0]}}" alt="#">
-                  @if($product->discount > 0)
-                    <span class="out-of-stock">Oferta {{$product->discount}}%</span>
+                  @if($product[0]->discount > 0)
+                    <span class="out-of-stock">Oferta {{$product[0]->discount}}%</span>
                   @endif
                     
                 </a>
@@ -40,13 +42,13 @@
                 </div>
               </div>
               <div class="product-content">
-                <h3><a href="{{route('product-detail',$product->slug)}}">{{ $product->title}}</a></h3>
+                <h3><a href="{{route('product-detail',$product[0]->slug)}}">{{ $product[0]->title}}</a></h3>
                 <div class="product-price">
-                  @if($product->discount > 0)
-                    <span class="old">${{$product->price}}</span>
-                    <span>${{$product->price - (($product->price * $product->discount) / 100)}}</span>
+                  @if($product[0]->discount > 0)
+                    <span class="old">${{$product[0]->price}}</span>
+                    <span>${{$product[0]->price - (($product[0]->price * $product[0]->discount) / 100)}}</span>
                   @else
-                    <span>${{$product->price}}</span>
+                    <span>${{$product[0]->price}}</span>
                   @endif
                 </div>
               </div>

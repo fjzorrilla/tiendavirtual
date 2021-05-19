@@ -108,8 +108,8 @@
           <select name="condition" class="form-control">
               <option value="">--Selecciona Condición--</option>
               <option value="default" {{(($product->condition=='default')? 'selected':'')}}>Default</option>
-              <option value="new" {{(($product->condition=='new')? 'selected':'')}}>New</option>
-              <option value="hot" {{(($product->condition=='hot')? 'selected':'')}}>Hot</option>
+              <option value="premium" {{(($product->condition=='premium')? 'selected':'')}}>Premium</option>
+              <option value="regular" {{(($product->condition=='regular')? 'selected':'')}}>Regular</option>
           </select>
         </div>
 

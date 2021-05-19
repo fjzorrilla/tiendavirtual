@@ -5,19 +5,26 @@ use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Politicas;
+use App\Models\Terminos;
+use App\Models\Delivery;
 use App\Models\PostTag;
 use App\Models\PostCategory;
 use App\Models\Post;
 use App\Models\Cart;
 use App\Models\Brand;
+use App\Models\Suscription;
 use App\User;
 use Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
+Use Redirect;
 use Newsletter;
 use DB;
 use Hash;
 use Illuminate\Support\Str; 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
+use Mail;
+use App\Mail\EmergencyCallReceived;
+use App\DayShipping;
 class FrontendController extends Controller
 {
    
@@ -26,31 +33,45 @@ class FrontendController extends Controller
     }
 
     public function home(){
-        $featured=Product::where('status','active')->where('is_featured',1)->orderBy('price','DESC')->limit(2)->get();
+        $featured=Product::where('status','active')->where('is_featured',1)->where('brand_id','<>2')->orderBy('price','DESC')->limit(2)->get();
         $posts=Post::where('status','active')->orderBy('id','DESC')->limit(3)->get();
-        $banners=Banner::where('status','active')->limit(3)->orderBy('id','DESC')->get();
+        $banners=Banner::where('status','active')->orderBy('id','DESC')->get();
         // return $banner;
-        $products=Product::where('status','active')->orderBy('id','DESC')->limit(8)->get();
+        $products=Product::where('status','active')->where('brand_id','<>2')->orderBy('id','DESC')->limit(8)->get();
         $category=Category::where('status','active')->where('is_parent',1)->orderBy('title','ASC')->get();
+        $moresale = Cart::where('order_id','<>',null)->pluck('product_id')->groupby('product_id');
+        $suscriptions=Suscription::where('status','active')->orderBy('id','DESC')->get();    
         // return $category;
         return view('frontend.index')
                 ->with('featured',$featured)
                 ->with('posts',$posts)
                 ->with('banners',$banners)
-                ->with('product_lists',$products)
+                ->with('moresale',$moresale) 
+                ->with('suscriptions',$suscriptions) 
                 ->with('category_lists',$category);
     }   
 
     public function aboutUs(){
         return view('frontend.pages.about-us');
     }
-
+    public function politicas(){
+        $politicas=Politicas::first();
+        return view('frontend.pages.politicas')->with('politicas',$politicas); 
+    }
+    public function terminos(){
+        $terminos=Terminos::first();
+        return view('frontend.pages.terminos')->with('terminos',$terminos); 
+    }
+    public function delivery(){
+        $delivery=Delivery::first();
+        return view('frontend.pages.delivery')->with('delivery',$delivery); 
+    }
     public function contact(){
         return view('frontend.pages.contact');
     }
 
     public function productDetail($slug){
-        $product_detail= Product::getProductBySlug($slug);
+        $product_detail= Product::getProductBySlug($slug); 
         // dd($product_detail);
         return view('frontend.pages.product_detail')->with('product_detail',$product_detail);
     }
@@ -108,14 +129,28 @@ class FrontendController extends Controller
         $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
         // Sort by number
         if(!empty($_GET['show'])){
-            $products=Product::where('status','active')->where('discount','> 0')->paginate($_GET['show']);
+            $products=Product::where('status','active')->where('discount','>', 0)->paginate($_GET['show']);
         }
         else{
-            $products=Product::where('status','active')->paginate(9);
+            $products=Product::where('status','active')->where('discount','>', 0)->paginate(9);
         }
-        // Sort by name , price, category
 
+        // Sort by name , price, category
         return view('frontend.pages.product-ofertas')->with('products',$products)->with('recent_products',$recent_products);
+    }
+    public function productDestacados(){
+      
+        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(6)->get();
+        // Sort by number
+        if(!empty($_GET['show'])){
+            $products=Product::where('status','active')->where('is_featured', 1)->paginate($_GET['show']);
+        }
+        else{
+            $products=Product::where('status','active')->where('is_featured', 1)->paginate(9);
+        }
+
+        // Sort by name , price, category
+        return view('frontend.pages.destacados')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productLists(){
         $products=Product::query();
@@ -152,17 +187,16 @@ class FrontendController extends Controller
             $products->whereBetween('price',$price);
         }
 
-        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
+        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(6)->get();
         // Sort by number
         if(!empty($_GET['show'])){
             $products=$products->where('status','active')->paginate($_GET['show']);
         }
         else{
-            $products=$products->where('status','active')->paginate(6);
+            $products=$products->where('status','active')->paginate(9);
         }
         // Sort by name , price, category
 
-      
         return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function productFilter(Request $request){
@@ -190,32 +224,20 @@ class FrontendController extends Controller
                 }
             }
 
-            $brandURL="";
-            if(!empty($data['brand'])){
-                foreach($data['brand'] as $brand){
-                    if(empty($brandURL)){
-                        $brandURL .='&brand='.$brand;
-                    }
-                    else{
-                        $brandURL .=','.$brand;
-                    }
-                }
-            }
-            // return $brandURL;
 
             $priceRangeURL="";
             if(!empty($data['price_range'])){
                 $priceRangeURL .='&price='.$data['price_range'];
             }
             if(request()->is('e-shop.loc/product-grids')){
-                return redirect()->route('product-grids',$catURL.$brandURL.$priceRangeURL.$showURL.$sortByURL);
+                return redirect()->route('product-grids',$catURL.$priceRangeURL.$showURL.$sortByURL);
             }
             else{
-                return redirect()->route('product-lists',$catURL.$brandURL.$priceRangeURL.$showURL.$sortByURL);
+                return redirect()->route('product-lists',$catURL.$priceRangeURL.$showURL.$sortByURL);
             }
     }
     public function productSearch(Request $request){
-        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
+        $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->limit(3)->get();
         $products=Product::orwhere('title','like','%'.$request->search.'%')
                     ->orwhere('slug','like','%'.$request->search.'%')
                     ->orwhere('description','like','%'.$request->search.'%')
@@ -225,7 +247,10 @@ class FrontendController extends Controller
                     ->paginate('9');
         return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
     }
-
+    public function calendarAjaxDate(Request $request){
+        $dates = DB::table('day_shippings')->get();
+        return response()->json(['status'=>true,'msg'=>'','data'=>$dates]);
+    }
     public function productBrand(Request $request){
         $products=Brand::getProductByBrand($request->slug);
         $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
@@ -238,15 +263,16 @@ class FrontendController extends Controller
 
     }
     public function productCat(Request $request){
-        $products=Category::getProductByCat($request->slug);
-        // return $request->slug;
-        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
-
+        
+        $categoryId = DB::table('categories')->where('slug', '=', $request->slug)->first();
+        $products=Product::where('status','active')->where('cat_id', $categoryId->id)->paginate(9);
+        $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->get();
         if(request()->is('e-shop.loc/product-grids')){
-            return view('frontend.pages.product-grids')->with('products',$products->products)->with('recent_products',$recent_products);
+
+            return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
         }
         else{
-            return view('frontend.pages.product-lists')->with('products',$products->products)->with('recent_products',$recent_products);
+            return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
         }
 
     }
@@ -369,10 +395,12 @@ class FrontendController extends Controller
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'],'status'=>'active'])){
             Session::put('user',$data['email']);
             request()->session()->flash('success','Successfully login');
+            Session::flash('success','Inicio de Sesión Exitoso!');
             return redirect()->route('home');
         }
         else{
-            request()->session()->flash('error','Invalid email and password pleas try again!');
+            Session::flash('error','Usuario o password incorrectos!');
+            request()->session()->flash('error','Usuario o password incorrectos!');
             return redirect()->back();
         }
     }
@@ -419,7 +447,87 @@ class FrontendController extends Controller
     public function showResetForm(){
         return view('auth.passwords.old-reset');
     }
+    public function passwordResetForm(Request $request){
+        
+        $user = DB::table('users')->where('email', '=', $request->email)->first();
+        
+        if (!$user) {
+            request()->session()->flash('error','Usuario no Existe en Nuestra Base de Datos!');
+            return back();
+        }
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 60; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        $carbon = new \Carbon\Carbon();
+        $date = $carbon->now();
+        //Create Password Reset Token
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => implode($pass),
+            'created_at' => $date
+        ]);
+        //Get the token just created above
+        $tokenData = DB::table('password_resets')
+            ->where('email', $request->email)->first();
 
+        if ($this->sendResetEmail($request->email, $tokenData->token)) {
+            request()->session()->flash('success','Se ha enviado un email para su verificacion!');
+            return back();
+            
+        } else {
+            request()->session()->flash('error','Error al enviar la verificación!');
+            return back();
+        }
+    }
+    private function sendResetEmail($email, $token)
+    {
+        //Retrieve the user from the database
+        $user = DB::table('users')->where('email', $email)->select('name', 'email')->first();
+        //Generate, the password reset link. The token generated is embedded in the link
+        
+        $link = config('base_url') . 'password/reset/' . $token . '/' . $user->email;
+
+        try {
+            Mail::to($user->email)->send(new EmergencyCallReceived($link)); 
+            return true;
+        } catch (\Exception $e) {
+            //dd($e);
+            return false;
+        }
+    }
+    public function resetPassword(Request $request){
+        $reset = DB::table('password_resets')->where('email', $request->email)->where('token', $request->token)->first();
+        if($reset){
+            return view('user.users.reset')->with('email',$reset->email);
+        }else{
+            request()->session()->flash('error','El link para el password no se encuentra disponible');
+            return redirect()->route('password.reset');
+        }
+    }
+    public function passwordRecover(Request $request){
+        $data2=$request->all();
+        
+        $user2 = DB::table('users')->where('email', $request->current_password)->select('id','name', 'email')->first();
+        $user=User::findOrFail($user2->id);
+        $data['password']=Hash::make($data2['new_password']);
+        $status=$user->fill($data)->save();
+        if($status){
+            $resetpass = DB::table('password_resets')->where('email', $request->current_password);
+            if ($resetpass) {
+                $resetpass->delete();
+            }
+            request()->session()->flash('success','Password reiniciado Exitosamente');
+            return redirect()->route('home');
+        }else{
+            request()->session()->flash('error','El link para el password no se encuentra disponible');
+            return redirect()->route('password.reset');
+        }
+    }
+    
     public function subscribe(Request $request){
         if(! Newsletter::isSubscribed($request->email)){
                 Newsletter::subscribePending($request->email);

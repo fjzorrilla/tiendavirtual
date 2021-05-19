@@ -90,7 +90,7 @@ Route::post('/coupon-store','CouponController@couponStore')->name('coupon-store'
 Route::get('payment', 'PayPalController@payment')->name('payment');
 Route::get('cancel', 'PayPalController@cancel')->name('payment.cancel');
 Route::get('payment/success', 'PayPalController@success')->name('payment.success');
-
+Route::get('suscriptions/{slug}', 'SuscriptionController@details')->name('suscriptionsDetails');
 
 
 // Backend section start
@@ -108,13 +108,13 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::resource('brand','BrandController');
 
 
-    Route::resource('suscrption','SuscriptionController');
-    Route::post('suscrption','SuscriptionController@store');
+   
     // Profile
     Route::get('/profile','AdminController@profile')->name('admin-profile');
     Route::post('/profile/{id}','AdminController@profileUpdate')->name('profile-update');
     // Category
     Route::resource('/category','CategoryController');
+    Route::resource('/suscription','SuscriptionController');
     // Product
     Route::resource('/product','ProductController');
     // Ajax for sub category
@@ -147,15 +147,6 @@ Route::group(['prefix'=>'/admin','middleware'=>['auth','admin']],function(){
     Route::get('change-password', 'AdminController@changePassword')->name('change.password.form');
     Route::post('change-password', 'AdminController@changPasswordStore')->name('change.password');
 });
-
-
-
-
-
-
-
-
-
 
 // User section start
 Route::group(['prefix'=>'/user','middleware'=>['user']],function(){

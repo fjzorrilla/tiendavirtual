@@ -55,74 +55,25 @@
   <div class="container">
     <br><br>
     <div class="row">
-      <div class="col-md-6 text-center">
-          <figure class="snip1477">
-            <img src="{{ asset('img/kit_3.png') }}" alt="sample38" />
-            <div class="title">
-              <div>
-                <h2>KIT</h2>
-                <h4>1</h4>
-              </div>
-            </div>
-            <figcaption>
-              <button class="ml-auto mr-auto active" onclick="window.location.href='/seguroEmp'">
-                SUSCRIBIRTE
-              </button>
-            </figcaption>
-            <a href="#"></a>
-          </figure>
-      </div>
-      <div class="col-md-6 text-center">
-          <figure class="snip1477">
-            <img src="{{ asset('img/kit_3.png') }}" alt="sample38" />
-            <div class="title">
-              <div>
-                <h2>KIT</h2>
-                <h4>2</h4>
-              </div>
-            </div>
-            <figcaption>
-              <button class="ml-auto mr-auto active" onclick="window.location.href='/seguroEmp'">
-                SUSCRIBIRTE
-              </button>
-            </figcaption>
-            <a href="#"></a>
-          </figure>
-      </div>
-      <div class="col-md-6 text-center">
-        <figure class="snip1477">
-            <img src="{{ asset('img/kit_3.png') }}" alt="sample38" />
-            <div class="title">
-              <div>
-                <h2>KIT</h2>
-                <h4>3</h4>
-              </div>
-            </div>
-            <figcaption>
-              <button class="ml-auto mr-auto active" onclick="window.location.href='/seguroEmp'">
-                SUSCRIBIRTE
-              </button>
-            </figcaption>
-            <a href="#"></a>
-          </figure>
-      </div>
-      <div class="col-md-6 text-center">
-        <figure class="snip1477">
-            <img src="{{ asset('img/kit_3.png') }}" alt="sample38" />
-            <div class="title">
-              <div>
-                <h2>KIT</h2>
-                <h4>4</h4>
-              </div>
-            </div>
-            <figcaption>
-              <button class="ml-auto mr-auto active" onclick="window.location.href='/seguroEmp'">
-                SUSCRIBIRTE
-              </button>
-            </figcaption>
-            <a href="#"></a>
-          </figure>
-      </div>
+        @foreach($suscriptions as $suscription)
+          <div class="col-md-6 text-center">
+              <figure class="snip1477">
+                <img src="{{ asset($suscription->photo) }}" alt="sample38" />
+                <div class="title">
+                  <div>
+                    <h2>{{$suscription->title}}</h2>
+                    
+                  </div>
+                </div>
+                <figcaption>
+                  <button class="ml-auto mr-auto active" onclick="window.location.href='/suscriptions/{{$suscription->slug}}'">
+                    SUSCRIBIRTE
+                  </button>
+                </figcaption>
+                <a href="#"></a>
+              </figure>
+          </div>
+        @endforeach
     </div>
   </div>
 </section>

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
-class SuscriptioProduct extends Model
+class ProductSuscription extends Model
 {
-    protected $fillable=['title','image'];
+    protected $fillable=['product_id','suscription_id'];
 
     public function cat_info(){
         return $this->hasOne('App\Models\Category','id','cat_id');
@@ -18,10 +18,10 @@ class SuscriptioProduct extends Model
         return Product::with(['cat_info','sub_cat_info'])->orderBy('id','desc')->paginate(10);
     }
     public function rel_prods(){
-        return $this->hasMany('App\Models\Product','cat_id','cat_id')->where('status','active')->orderBy('id','DESC')->limit(8);
+        return $this->hasMany('App\Models\Product','product_id','product_id')->where('status','active')->orderBy('id','DESC');
     }
-    public function getReview(){
-        return $this->hasMany('App\Models\ProductReview','product_id','id')->with('user_info')->where('status','active')->orderBy('id','DESC');
+    public function getProdSuscrip($id){
+        return $data = ProductSuscription::where('id',$id)->get();
     }
     public static function getProductBySlug($slug){
         return Product::with(['cat_info','rel_prods','getReview'])->where('slug',$slug)->first();
@@ -33,7 +33,9 @@ class SuscriptioProduct extends Model
         }
         return 0;
     }
-
+    public static function sub_products(){
+        return $this->hasMany('App\Models\Product','id','product_id')->where('status','active');
+    }
     public function carts(){
         return $this->hasMany(Cart::class)->whereNotNull('order_id');
     }
@@ -41,5 +43,6 @@ class SuscriptioProduct extends Model
     public function wishlists(){
         return $this->hasMany(Wishlist::class)->whereNotNull('cart_id');
     }
+
 
 }

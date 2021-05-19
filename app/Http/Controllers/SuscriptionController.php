@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Category;
-use App\Models\Brand;
-
+use App\Models\Product;
+use App\Models\Suscription;
 use Illuminate\Support\Str;
+use App\Models\ProductSuscription;
 
 class SuscriptionController extends Controller
 {
@@ -18,22 +18,21 @@ class SuscriptionController extends Controller
      */
     public function index()
     {
-        $products=Product::getAllProduct();
-        // return $products;
-        return view('backend.product.index')->with('products',$products);
+        $suscription=Suscription::getAllSuscription();
+        // return $category;
+        return view('backend.suscription.index')->with('suscription',$suscription);
     }
 
-    /**
+    /** 
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $brand=Brand::get();
-        $category=Category::where('is_parent',1)->get();
-        // return $category;
-        return view('backend.product.create')->with('categories',$category)->with('brands',$brand);
+        $parent_cats=Category::orderBy('title','ASC')->get();
+        $products=Product::getAllProduct();
+        return view('backend.suscription.create')->with('parent_cats',$parent_cats)->with('products',$products);
     }
 
     /**
@@ -44,22 +43,28 @@ class SuscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
+        dd($request);
         $this->validate($request,[
             'title'=>'string|required',
-            'photo'=>'string|required'
+            'status'=>'required|in:active,inactive',
         ]);
-
-        $data=$request->all();
-        
+        $data= $request->all();
+        $slug=Str::slug($request->title);
+        $count=Suscription::where('slug',$slug)->count();
+        if($count>0){
+            $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
+        }
+        $data['slug']=$slug;
+        // return $data;   
         $status=Suscription::create($data);
         if($status){
-            request()->session()->flash('success','Suscription Successfully added');
+            request()->session()->flash('success','Suscription successfully added');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','Error occurred, Please try again!');
         }
-        return redirect()->route('home');
+        return redirect()->route('suscription.index');
+
 
     }
 
@@ -82,16 +87,20 @@ class SuscriptionController extends Controller
      */
     public function edit($id)
     {
-        $brand=Brand::get();
-        $product=Product::findOrFail($id);
-        $category=Category::where('is_parent',1)->get();
-        $items=Product::where('id',$id)->get();
-        // return $items;
-        return view('backend.product.edit')->with('product',$product)
-                    ->with('brands',$brand)
-                    ->with('categories',$category)->with('items',$items);
+        $suscription=Suscription::findOrFail($id);
+        return view('backend.suscription.edit')->with('suscription',$suscription);
     }
 
+    public function details($slug){
+        $suscription=Suscription::where('slug',$slug)->first();
+        $prodSuscript = ProductSuscription::where('suscription_id',$suscription->id)->get();
+        $productos = [];
+        foreach ($prodSuscript as $key => $producto) {
+            $list = Product::where('id',$producto->product_id)->get();
+            $productos[$key] = $list[0];
+        }
+        return view('frontend.pages.suscription')->with('products',$productos)->with('suscription',$suscription);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -101,22 +110,22 @@ class SuscriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request->all();
         $Suscription=Suscription::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required',
-            'photo'=>'string|required'
+            'status'=>'required|in:active,inactive',
         ]);
-
-        $data=$request->all();
-        
+        $data= $request->all();
+        // return $data;
         $status=$Suscription->fill($data)->save();
         if($status){
-            request()->session()->flash('success','Product Successfully updated');
+            request()->session()->flash('success','Suscripcion successfully updated');
         }
         else{
-            request()->session()->flash('error','Please try again!!');
+            request()->session()->flash('error','Error occurred, Please try again!');
         }
-        return redirect()->route('product.index');
+        return redirect()->route('suscription.index');
     }
 
     /**
@@ -127,15 +136,29 @@ class SuscriptionController extends Controller
      */
     public function destroy($id)
     {
-        $product=Product::findOrFail($id);
-        $status=$product->delete();
+        $suscrption=Suscription::findOrFail($id);
+        
+        $status=$suscrption->delete();
         
         if($status){
-            request()->session()->flash('success','Product successfully deleted');
+            request()->session()->flash('success','suscrption successfully deleted');
         }
         else{
-            request()->session()->flash('error','Error while deleting product');
+            request()->session()->flash('error','Error while deleting category');
         }
-        return redirect()->route('product.index');
+        return redirect()->route('suscription.index');
+    }
+
+    public function getChildByParent(Request $request){
+        // return $request->all();
+        $category=Category::findOrFail($request->id);
+        $child_cat=Category::getChildByParentIDSLECT($request->id); 
+        // return $child_cat;
+        if(count($child_cat)<=0){
+            return response()->json(['status'=>false,'msg'=>'','data'=>null]);
+        }
+        else{
+            return response()->json(['status'=>true,'msg'=>'','data'=>$child_cat]);
+        }
     }
 }

@@ -57,7 +57,7 @@ class ProductController extends Controller
             'child_cat_id'=>'nullable|exists:categories,id',
             'is_featured'=>'sometimes|in:1',
             'status'=>'required|in:active,inactive',
-            'condition'=>'required|in:default,new,hot',
+            'condition'=>'required|in:default,premium,regular',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
@@ -129,6 +129,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $product=Product::findOrFail($id);
+
         $this->validate($request,[
             'title'=>'string|required',
             'summary'=>'string|required',
@@ -141,7 +142,7 @@ class ProductController extends Controller
             'is_featured'=>'sometimes|in:1',
             'brand_id'=>'nullable|exists:brands,id',
             'status'=>'required|in:active,inactive',
-            'condition'=>'required|in:default,new,hot',
+            'condition'=>'required|in:default,premium,regular',
             'price'=>'required|numeric',
             'discount'=>'nullable|numeric'
         ]);
@@ -155,7 +156,7 @@ class ProductController extends Controller
         else{
             $data['size']='';
         }
-        // return $data;
+        
         $status=$product->fill($data)->save();
         if($status){
             request()->session()->flash('success','Product Successfully updated');

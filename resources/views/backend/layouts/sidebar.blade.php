@@ -72,6 +72,19 @@
           </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#suscriptionCollapse" aria-expanded="true" aria-controls="suscriptionCollapse">
+          <i class="fas fa-sitemap"></i>
+          <span>Suscripciones</span>
+        </a>
+        <div id="suscriptionCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Suscripciones Opciónes:</h6>
+            <a class="collapse-item" href="{{route('suscription.index')}}">Suscripciones</a>
+            <a class="collapse-item" href="{{route('suscription.create')}}">Agregar Suscripción</a>
+          </div>
+        </div>
+    </li>
     {{-- Products --}}
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#productCollapse" aria-expanded="true" aria-controls="productCollapse">
@@ -124,19 +137,7 @@
             <span>Pedidos</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#brandCollapse" aria-expanded="true" aria-controls="brandCollapse">
-          <i class="fas fa-table"></i>
-          <span>Suscripciones</span>
-        </a>
-        <div id="brandCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Suscripciones Opciónes:</h6>
-            <a class="collapse-item" href="{{route('suscription.index')}}">Suscripciones</a>
-            <a class="collapse-item" href="{{route('suscription.create')}}">Agregar Suscripción</a>
-          </div>
-        </div>
-    </li>
+    
     <!-- Reviews -->
     <li class="nav-item">
         <a class="nav-link" href="{{route('review.index')}}">
