@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\Suscription;
 use Illuminate\Support\Str;
 use App\Models\ProductSuscription;
-
+use DB;
 class SuscriptionController extends Controller
 {
     /**
@@ -30,9 +30,8 @@ class SuscriptionController extends Controller
      */
     public function create()
     {
-        $parent_cats=Category::orderBy('title','ASC')->get();
         $products=Product::getAllProduct();
-        return view('backend.suscription.create')->with('parent_cats',$parent_cats)->with('products',$products);
+        return view('backend.suscription.create')->with('products',$products);
     }
 
     /**
@@ -99,7 +98,12 @@ class SuscriptionController extends Controller
     public function edit($id)
     {
         $suscription=Suscription::findOrFail($id);
-        return view('backend.suscription.edit')->with('suscription',$suscription);
+        $suscriptionProd=ProductSuscription::where('suscription_id',$id)->get();
+        foreach ($suscriptionProd as $key => $producSus) {
+            $listProd[$key] = $producSus->product_id;   
+        }
+        $products=Product::getAllProduct();
+        return view('backend.suscription.edit')->with('suscription',$suscription)->with('products',$products)->with('listProd',$listProd);
     }
 
     public function details($slug){
@@ -121,16 +125,27 @@ class SuscriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return $request->all();
+
         $Suscription=Suscription::findOrFail($id);
         $this->validate($request,[
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
         ]);
         $data= $request->all();
-        // return $data;
+        
         $status=$Suscription->fill($data)->save();
         if($status){
+            $prodSuscripcion = DB::table('product_suscriptions')->where('suscription_id', $id);
+            if ($prodSuscripcion) {
+                $prodSuscripcion->delete();
+            }
+            if(count($data["productos"]) > 0){
+                foreach ($data["productos"] as $key => $value) {
+                    $prod['product_id'] = $value;
+                    $prod['suscription_id'] = $id;
+                    ProductSuscription::create($prod);
+                }
+            }
             request()->session()->flash('success','Suscripcion successfully updated');
         }
         else{

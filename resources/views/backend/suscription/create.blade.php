@@ -44,103 +44,103 @@
           @enderror
         </div>
         <div class="card-body">
-      <div class="table-responsive">
-        @if(count($products)>0)
-        <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
-          <thead>
-            <tr>
-              <th>S.N.</th>
-              <th>Nombre</th>
-              <th>Categoria</th>
-              <th>Precio</th>
-              <th>Descuento</th>
-              <th>Condición</th>
-              <th>Marcas</th>
-              <th>Stock</th>
-              <th>Fotos</th>
-              <th>Estatus</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th>S.N.</th>
-              <th>Nombre</th>
-              <th>Categoria</th>
-              <th>Precio</th>
-              <th>Descuento</th>
-              <th>Condición</th>
-              <th>Stock</th>
-              <th>Fotos</th>
-              <th>Estatus</th>
-            </tr>
-          </tfoot>
-          <tbody>
-
-            @foreach($products as $product)
-              @php
-                $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
-                $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
-              @endphp
+          <div class="table-responsive">
+            @if(count($products)>0)
+            <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
+              <thead>
                 <tr>
-                    <td><input type="checkbox" name="productos[]" value="{{$product->id}}"></td>
-                    <td>{{$product->title}}</td>
-                    <td>{{$product->cat_info['title']}}
-                      <sub>
-                        @foreach($sub_cat_info as $data)
-                          {{$data->title}}
-                        @endforeach
-                      </sub>
-                    </td>
-                    @if($product->discount > 0)
-                      <td><span style="text-decoration: line-through;">{{$product->price}}</span> / {{$product->price - ($product->price * $product->discount) / 100}}</td>
-                    @else
-                      <td>{{$product->price}}</td>
-                    @endif
-                    <td>{{$product->discount}}%</td>
-                    <td>{{$product->condition}}</td>
-                    <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
-                    <td>
-                      @if($product->stock>0)
-                      <span class="badge badge-primary">{{$product->stock}}</span>
-                      @else
-                      <span class="badge badge-danger">{{$product->stock}}</span>
-                      @endif
-                    </td>
-                    <td>
-                        @if($product->photo)
-                            @php
-                              $photo=explode(',',$product->photo);
-                              // dd($photo);
-                            @endphp
-                            <img src="{{$photo[0]}}" class="img-fluid zoom" style="max-width:80px" alt="{{$product->photo}}">
-                        @else
-                            <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
-                        @endif
-                    </td>
-                    <td>
-                        @if($product->status=='active')
-                            <span class="badge badge-success">{{$product->status}}</span>
-                        @else
-                            <span class="badge badge-warning">{{$product->status}}</span>
-                        @endif
-                    </td>
+                  <th>S.N.</th>
+                  <th>Nombre</th>
+                  <th>Categoria</th>
+                  <th>Precio</th>
+                  <th>Descuento</th>
+                  <th>Condición</th>
+                  <th>Marcas</th>
+                  <th>Stock</th>
+                  <th>Fotos</th>
+                  <th>Estatus</th>
                 </tr>
-            @endforeach
-          </tbody>
-        </table>
-        
-        @else
-          <h6 class="text-center">¡No se han encontrado productos! Por favor crea producto</h6>
-        @endif
-      </div>
-    </div>
-        <div class="form-group mb-3">
-          <button type="reset" class="btn btn-warning">Reset</button>
-           <button class="btn btn-success" type="submit">Guardar</button>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>S.N.</th>
+                  <th>Nombre</th>
+                  <th>Categoria</th>
+                  <th>Precio</th>
+                  <th>Descuento</th>
+                  <th>Condición</th>
+                  <th>Stock</th>
+                  <th>Fotos</th>
+                  <th>Estatus</th>
+                </tr>
+              </tfoot>
+              <tbody>
+
+                @foreach($products as $product)
+                  @php
+                    $sub_cat_info=DB::table('categories')->select('title')->where('id',$product->child_cat_id)->get();
+                    $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
+                  @endphp
+                    <tr>
+                        <td><input type="checkbox" name="productos[]" value="{{$product->id}}"></td>
+                        <td>{{$product->title}}</td>
+                        <td>{{$product->cat_info['title']}}
+                          <sub>
+                            @foreach($sub_cat_info as $data)
+                              {{$data->title}}
+                            @endforeach
+                          </sub>
+                        </td>
+                        @if($product->discount > 0)
+                          <td><span style="text-decoration: line-through;">{{$product->price}}</span> / {{$product->price - ($product->price * $product->discount) / 100}}</td>
+                        @else
+                          <td>{{$product->price}}</td>
+                        @endif
+                        <td>{{$product->discount}}%</td>
+                        <td>{{$product->condition}}</td>
+                        <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
+                        <td>
+                          @if($product->stock>0)
+                          <span class="badge badge-primary">{{$product->stock}}</span>
+                          @else
+                          <span class="badge badge-danger">{{$product->stock}}</span>
+                          @endif
+                        </td>
+                        <td>
+                            @if($product->photo)
+                                @php
+                                  $photo=explode(',',$product->photo);
+                                  // dd($photo);
+                                @endphp
+                                <img src="{{$photo[0]}}" class="img-fluid zoom" style="max-width:80px" alt="{{$product->photo}}">
+                            @else
+                                <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
+                            @endif
+                        </td>
+                        <td>
+                            @if($product->status=='active')
+                                <span class="badge badge-success">{{$product->status}}</span>
+                            @else
+                                <span class="badge badge-warning">{{$product->status}}</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
+            
+            @else
+              <h6 class="text-center">¡No se han encontrado productos! Por favor crea producto</h6>
+            @endif
+          </div>
         </div>
-      </form>
+            <div class="form-group mb-3">
+              <button type="reset" class="btn btn-warning">Reset</button>
+               <button class="btn btn-success" type="submit">Guardar</button>
+            </div>
+          </form>
+        </div>
     </div>
-</div>
 
 @endsection
 
