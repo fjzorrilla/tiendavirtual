@@ -43,21 +43,32 @@ class SuscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $this->validate($request,[
             'title'=>'string|required',
             'status'=>'required|in:active,inactive',
         ]);
         $data= $request->all();
+        
         $slug=Str::slug($request->title);
         $count=Suscription::where('slug',$slug)->count();
         if($count>0){
             $slug=$slug.'-'.date('ymdis').'-'.rand(0,999);
         }
         $data['slug']=$slug;
-        // return $data;   
+        // return $data; 
         $status=Suscription::create($data);
+
+        
+
         if($status){
+            $id = Suscription::latest('id')->first();
+            if(count($data["productos"]) > 0){
+                foreach ($data["productos"] as $key => $value) {
+                    $prod['product_id'] = $value;
+                    $prod['suscription_id'] = $id->id;
+                    ProductSuscription::create($prod);
+                }
+            }
             request()->session()->flash('success','Suscription successfully added');
         }
         else{
