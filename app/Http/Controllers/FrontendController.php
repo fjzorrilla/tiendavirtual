@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Politicas;
 use App\Models\PostTag;
 use App\Models\PostCategory;
 use App\Models\Post;
