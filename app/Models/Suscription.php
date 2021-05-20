@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Cart;
 class Suscription extends Model
 {
-    protected $fillable=['title','slug','photo','status'];
+    protected $fillable=['title','slug','photo','status','regular','premium','superpremium'];
 
     public function cat_info(){
         return $this->hasOne('App\Models\Category','id','cat_id');

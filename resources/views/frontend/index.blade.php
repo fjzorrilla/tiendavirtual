@@ -57,7 +57,7 @@
     <div class="row">
         @foreach($suscriptions as $suscription)
           <div class="col-md-6 text-center">
-              <figure class="snip1477">
+              <figure class="snip1477" onclick="window.location.href='/suscriptions/{{$suscription->slug}}'">
                 <img src="{{ asset($suscription->photo) }}" alt="sample38" />
                 <div class="title">
                   <div>
@@ -70,7 +70,7 @@
                     SUSCRIBIRTE
                   </button>
                 </figcaption>
-                <a href="#"></a>
+                <a href="/suscriptions/{{$suscription->slug}}"></a>
               </figure>
           </div>
         @endforeach

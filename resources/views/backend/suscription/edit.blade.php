@@ -33,7 +33,27 @@
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        
+        <div class="form-group">
+          <label for="regular" class="col-form-label">Precio Regular <span class="text-danger">*</span></label>
+          <input id="regular" type="text" name="regular" placeholder="Precio Regular" class="form-control" value="{{$suscription->regular}}">
+          @error('regular')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+        <div class="form-group">
+          <label for="premium" class="col-form-label">Precio Premium <span class="text-danger">*</span></label>
+          <input id="premium" type="text" name="premium" placeholder="Precio Premium" class="form-control" value="{{$suscription->premium}}">
+          @error('premium')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
+        <div class="form-group">
+          <label for="superpremium" class="col-form-label">Precio Super Premium <span class="text-danger">*</span></label>
+          <input id="superpremium" type="text" name="superpremium" placeholder="Precio Super Premium" class="form-control" value="{{$suscription->superpremium}}">
+          @error('superpremium')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
           <select name="status" class="form-control">

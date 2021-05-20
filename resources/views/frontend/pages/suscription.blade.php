@@ -26,26 +26,37 @@
 			<section class="product-area shop-sidebar shop-list shop section">
 				<div class="container">
 					<div class="row">
+								
+							<div class="col-md-8">
+								<label>Condición de Producto: </label>
+								<select class="condition" name="condition" id="condition">
+									<option value="">Seleccione</option>
+									@if($suscription->regular != '' && $suscription->regular > 0)
+										<option value="regular-{{$suscription->regular}}" data="{{$suscription->regular}}">Regular</option>
+									@endif
+									@if($suscription->premium != '' && $suscription->premium > 0)
+									<option value="premium-{{$suscription->premium}}" data="{{$suscription->premium}}">Premium</option>
+									@endif
+									@if($suscription->superpremium != '' && $suscription->superpremium > 0)
+									<option value="superpremium-{{$suscription->premium}}" data="{{$suscription->superpremium}}">Super superpremium</option>
+									@endif
+								</select>
+							</div>
+							<div class="col-md-4">
+								<span class="priceSpan"></span>
+							</div>
+						
+					</div>
+					<div class="row">
 						
 						<div class="col-lg-12 col-md-12 col-12">
-							<div class="row">
-								<div class="shop-shorter">
-									<div class="single-shorter">
-										<label>Condición de Producto: </label>
-										<select class="condition" name="condition" id="condition">
-											<option value="default">Default</option>
-											<option value="regular">Regular</option>
-											<option value="premium">Premium</option>
-										</select>
-									</div>
-								</div>
-							</div>
+							
 							<div class="row">
 								@if(count($products))
 									@foreach($products as $product)
 									 	{{-- {{$product}} --}}
 										<!-- Start Single List -->
-										<div class="producto-card col-lg-3 col-md-3 col-12 {{$product->condition}}" style="{{$product->condition != 'default' ? 'display: none' : ''}}" >
+										<div class="producto-card col-lg-3 col-md-3 col-12 {{$product->condition}}">
 	                                        <div class="single-product">
 	                                            <div class="product-img">
 	                                                <a href="{{route('product-detail',$product->slug)}}">
@@ -54,25 +65,13 @@
 	                                                    @endphp
 	                                                    <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
 	                                                    <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-	                                                    @if($product->discount > 0)
-	                                                                <span class="price-dec">{{$product->discount}} % Descuento</span>
-	                                                    @endif
+	                                                    
 	                                                </a>
 	                                                
 	                                            </div>
 	                                            <div class="product-content">
 	                                                <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
-	                                                @php
-	                                                    $after_discount=($product->price-($product->price*$product->discount)/100);
-	                                                @endphp
-	                                                @if($product->discount > 0)
-	                                                    <small>
-	                                                        <del class="text-muted">${{number_format($product->price,2)}}</del>
-	                                                    </small>    
-	                                                    ${{number_format($after_discount,2)}}  
-	                                                @else
-	                                                    ${{$product->price}}      
-	                                                @endif
+	                                                
 	                                            </div>
 	                                        </div>
 	                                    </div>
@@ -227,6 +226,9 @@
         margin-top:10px;
         color: white;
     }
+    .priceSpan{
+    	font-size: 38px;
+    }
 </style>
 @endpush
 @push('scripts')
@@ -296,7 +298,11 @@
 	        }
 	        $("#condition").change(function(){
 	        	$(".producto-card").hide('fade')
-	        	$("."+$(this).val()).show('fade')
+	        	let price = $(this).val().split('-')
+	        	$(".priceSpan").html('S/'+price[1]);
+	        	console.log($(this).val())
+			    $("."+$(this).val()).show('slow')
+				
 	        })
         })
 
