@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2021 a las 22:18:57
+-- Tiempo de generación: 20-05-2021 a las 04:02:50
 -- Versión del servidor: 10.4.16-MariaDB
 -- Versión de PHP: 7.4.12
 
@@ -528,12 +528,14 @@ CREATE TABLE `product_suscriptions` (
 --
 
 INSERT INTO `product_suscriptions` (`id`, `product_id`, `suscription_id`, `created_at`, `updated_at`) VALUES
-(1, 8, 1, '2021-05-19 20:14:14', '2021-05-19 20:14:14'),
-(2, 7, 1, '2021-05-19 20:14:14', '2021-05-19 20:14:14'),
-(3, 6, 1, '2021-05-19 20:14:14', '2021-05-19 20:14:14'),
-(4, 4, 1, '2021-05-19 20:14:15', '2021-05-19 20:14:15'),
-(5, 3, 1, '2021-05-19 20:14:15', '2021-05-19 20:14:15'),
-(6, 1, 1, '2021-05-19 20:14:15', '2021-05-19 20:14:15');
+(16, 7, 2, '2021-05-19 22:30:42', '2021-05-19 22:30:42'),
+(17, 3, 2, '2021-05-19 22:30:42', '2021-05-19 22:30:42'),
+(18, 8, 1, '2021-05-20 01:14:33', '2021-05-20 01:14:33'),
+(19, 7, 1, '2021-05-20 01:14:33', '2021-05-20 01:14:33'),
+(20, 6, 1, '2021-05-20 01:14:33', '2021-05-20 01:14:33'),
+(21, 5, 1, '2021-05-20 01:14:33', '2021-05-20 01:14:33'),
+(22, 4, 1, '2021-05-20 01:14:34', '2021-05-20 01:14:34'),
+(23, 3, 1, '2021-05-20 01:14:34', '2021-05-20 01:14:34');
 
 -- --------------------------------------------------------
 
@@ -598,6 +600,9 @@ CREATE TABLE `suscriptions` (
   `slug` varchar(255) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `status` varchar(255) NOT NULL,
+  `premium` decimal(20,0) NOT NULL,
+  `superpremium` decimal(20,0) NOT NULL,
+  `regular` decimal(20,0) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -606,8 +611,9 @@ CREATE TABLE `suscriptions` (
 -- Volcado de datos para la tabla `suscriptions`
 --
 
-INSERT INTO `suscriptions` (`id`, `title`, `slug`, `photo`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Suscripcion 1', 'suscripcion-1', '/storage/photos/1/blog3.jpg', 'active', '2021-05-19 20:14:14', '2021-05-19 20:14:14');
+INSERT INTO `suscriptions` (`id`, `title`, `slug`, `photo`, `status`, `premium`, `superpremium`, `regular`, `created_at`, `updated_at`) VALUES
+(1, 'Suscripcion 1', 'suscripcion-1', '/storage/photos/1/blog3.jpg', 'active', '900', '1000', '800', '2021-05-19 20:14:14', '2021-05-20 01:14:33'),
+(2, 'Suscripcion 2', 'suscripcion-2', '/storage/photos/1/blog3.jpg', 'active', '0', '0', '0', '2021-05-19 22:30:42', '2021-05-19 22:30:42');
 
 -- --------------------------------------------------------
 
@@ -941,7 +947,7 @@ ALTER TABLE `product_reviews`
 -- AUTO_INCREMENT de la tabla `product_suscriptions`
 --
 ALTER TABLE `product_suscriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `settings`
@@ -959,7 +965,7 @@ ALTER TABLE `shippings`
 -- AUTO_INCREMENT de la tabla `suscriptions`
 --
 ALTER TABLE `suscriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
