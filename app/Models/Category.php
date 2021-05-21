@@ -27,8 +27,8 @@ class Category extends Model
     public function child_cat(){
         return $this->hasMany('App\Models\Category','parent_id','id')->where('status','active');
     }
-    public static function getAllParentWithChild(){ 
-        return Category::with('child_cat')->where('is_parent',1)->where('status','active')->orderBy('title','ASC')->get();
+    public static function getAllParentWithChild(){  
+        return Category::with('child_cat')->where('is_parent',1)->where('status','active')->orderBy('id','ASC')->get();
     }
     public static function getChildByParentIDSLECT($id){
         return Category::where('is_parent',0)->orderBy('id','ASC')->pluck('title','id');

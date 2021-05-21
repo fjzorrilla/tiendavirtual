@@ -107,54 +107,47 @@
                         <div class="menu-area">
                             <div class="menu">
                                 <ul>
-                                  <li><a href="/">Inicio</a></li>
-                                  <li class="{{Request::path()=='product-cat/perros' ? 'active' : ''}}">
-                                    <a href="#">Perros</a>
-                                    <ul>
-                                      <li>
-                                        <a href="#">Alimentos</a>
-                                        <ul>
-                                          <li><a href="#">Alimentos Secos</a></li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <a href="#">Cuidado e Higiene</a>
-                                        <ul>
-                                          <li><a href="#">Antipulgas</a></li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <a href="#">Accesorios</a>
-                                        <ul>
-                                          <li><a href="#">Correas</a></li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                      </li>
-                                    </ul>
-                                  </li>
-                                  <li  class="{{Request::path()=='product-cat/gatos' ? 'active' : ''}}">
-                                    <a href="#">Gatos</a>
-                                    <ul>
-                                      <li><a href="#">Alimentos</a>
-                                        <ul>
-                                          <li><a href="#">Alimentos Secos</a></li>
-                                        </ul>
-                                      </li>
-                                    </ul>
-                                  </li>
-                                  <li  class="{{Request::path()=='product-cat/humano-mascota' ? 'active' : ''}}">
-                                    <a href="#">Humano / Mascota</a>
-                                    <ul>
-                                      <li><a href="#">Alimentos</a>
-                                        <ul>
-                                          <li><a href="#">Alimentos Secos</a></li>
-                                        </ul>
-                                      </li>
+                                    <li><a href="/">Inicio</a></li>
+                                    @php
+                                        $mainCat = Helper::getAllCategory();
+                                    @endphp
+                                    @foreach($mainCat as $key =>$main)
 
-                                    </ul>
-                                  </li>
+                                        <li class="{{Request::path()=='product-cat/perros' ? 'active' : ''}}">
+                                            <a href="{{route('product-cat',$main->slug)}}">{{$main->title}}</a>
+                                            <ul>
+                                                
+                                                @foreach($main->child_cat as $key =>$submain)    
+                                                    <li>
+                                                        <a href="{{route('product-scat',[$main->slug,$submain->slug])}}">{{$submain->title}}</a>
+                                                        @php
+                                                            $subCat = DB::table('categories')->where('parent_id',$submain->id)->get();
+                                                        @endphp
+                                                        <ul>
+                                                            @foreach($subCat as $key =>$submainChild)    
+                                                                
+                                                                <li>
+                                                                    <a href="{{route('product-sub-cat',[$main->slug,$submain->slug,$submainChild->slug])}}">{{$submainChild->title}}</a>
+                                                                </li>
+                                                                
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                @endforeach
+                                                @php
+                                                    $prod = Helper::preoductByCategory($main->id);
+                                                    $photo=explode(',',$prod[0]->photo);
+                                                @endphp
+                                                
+                                                <li>
+                                                    <a href="{{route('product-detail',$prod[0]->slug)}}">
+                                                        <img src="{{$photo[0]}}" alt="sample38"/>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                
                                 </ul>
                               </div>
                         </div>

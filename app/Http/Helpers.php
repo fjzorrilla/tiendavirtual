@@ -27,7 +27,6 @@ class Helper{
 
         if($menu){
             ?>
-            
             <li>
             <a href="javascript:void(0);">Category<i class="ti-angle-down"></i></a>
                 <ul class="dropdown border-0 shadow">
@@ -149,7 +148,6 @@ class Helper{
     // Total price with shipping and coupon
     public static function grandPrice($id,$user_id){
         $order=Order::find($id);
-        dd($id);
         if($order){
             $shipping_price=(float)$order->shipping->price;
             $order_price=self::orderPrice($id,$user_id);
@@ -176,6 +174,13 @@ class Helper{
     }
     public static function productDetails($id){
         return Product::where('id',$id)->get();
+    }
+    public static function getCategoryChild($id){
+        $category = new Category();
+        $menu=$category->getChildByParentIDMain($id);
+    }
+    public static function preoductByCategory($id){
+        return Product::where('cat_id',$id)->get();
     }
 }
 

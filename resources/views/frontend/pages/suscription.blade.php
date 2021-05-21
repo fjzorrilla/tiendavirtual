@@ -294,9 +294,11 @@
     	font-size: 22px;
     }
     .box-suscription .title{
-    	background: #ffbc005e;
-    	padding: 15px;
-    	border-bottom:1px solid #fed100;
+		background: #ffbc005e;
+		padding: 15px;
+		border-bottom: 1px solid #fed100;
+		font-size: 19px;
+		color: chocolate;
     }
     .box-products{
     	margin: 25px;

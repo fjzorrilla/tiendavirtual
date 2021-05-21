@@ -64,7 +64,7 @@
 	                                                                            
 																					- <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
 																						{{$sub_menus->title}}
-																					</a>
+																					</a><br>
 	                                                                            @endforeach
 	                                                                        </ul>
 	                                                                    </li>
