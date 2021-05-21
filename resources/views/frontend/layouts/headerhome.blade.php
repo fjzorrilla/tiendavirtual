@@ -111,6 +111,7 @@
                                   <li>
                                     <a href="">Más Vendidos</a>
                                     <ul>
+                                      @if(count($moresale) > 0)
                                       @foreach($moresale[""] as $key => $product)
                                         @php
                                           $product = Helper::productDetails($product);
@@ -126,6 +127,7 @@
                                           </ul>
                                         </li>
                                       @endforeach
+                                      @endif
                                       
                                     </ul>
                                   </li>

@@ -1,3 +1,5 @@
+
+@if(count($moresale) > 0)
 <div class="product-area most-popular section">
   <div class="container">
     <div class="row">
@@ -60,3 +62,4 @@
     </div>
   </div>
 </div>
+@endif

@@ -69,7 +69,11 @@
 											</td>
 											<td class="total-amount cart_single_price" data-title="Total"><span class="money">${{$cart['amount']}}</span></td>
 											
-											<td class="action" data-title="Remove"><a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a></td>
+											<td class="action" data-title="Remove">
+												@if(!$cart->suscription_id && $cart->suscription_id == '')
+													<a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a>
+												@endif
+											</td>
 										</tr>
 									@endforeach
 									<track>

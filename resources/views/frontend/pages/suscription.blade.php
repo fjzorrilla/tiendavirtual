@@ -20,63 +20,119 @@
 			</div>
 		</div>
 		<!-- End Breadcrumbs -->
-		<form action="{{route('shop.filter')}}" method="POST">
-		@csrf
+		
 			<!-- Product Style 1 -->
 			<section class="product-area shop-sidebar shop-list shop section">
 				<div class="container">
 					<div class="row">
+						@if($suscription->regular != '' && $suscription->regular > 0)
 						<div class="col-lg-4 col-md-4 col-12 text-center ">
 							<div class="box-suscription-intern box-suscription">
-								<div class="title">
-									Regular
-								</div>
-								<div class="price">
-									S/{{$suscription->regular}}
-								</div>
-
-								@if(count($products))
-									<div class="box-products">
-										@foreach($products as $product)
-											@if($product->condition == 'regular')
-												<div class="row">
-				                                    <div class="col-md-3">
-				                                    	@php 
-			                                                $photo=explode(',',$product->photo);
-			                                            @endphp
-			                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-				                                    </div>
-			                                        <div class="col-md-9 title-prod">
-			                                        	<a href="{{route('product-detail',$product->slug)}}"> 
-				                                            {{$product->title}}
-				                                        </a>
-			                                        </div>
-				                                    
-				                                </div>
-											@endif
-										@endforeach
+								<form action="{{route('singleAddToCartSuscription')}}" method="POST">
+									@csrf 
+									<input type="hidden" name="suscription_id" value="{{$suscription->id}}">
+									<input type="hidden" name="tipo" value="regular">
+									<div class="title">
+										Regular
 									</div>
-								@endif
-								<div class="col-md-12 justify-content-center d-flex">
-		                            <button class="btn">Adquirir Suscripcion</button>
-		                        </div>
+									<div class="price">
+										S/{{$suscription->regular}}
+									</div>
+
+									@if(count($products))
+										<div class="box-products">
+											@foreach($products as $product)
+												@if($product->condition == 'regular')
+													<div class="row">
+					                                    <div class="col-md-3">
+					                                    	@php 
+				                                                $photo=explode(',',$product->photo);
+				                                            @endphp
+				                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+					                                    </div>
+				                                        <div class="col-md-9 title-prod">
+				                                        	<a href="{{route('product-detail',$product->slug)}}"> 
+					                                            {{$product->title}}
+					                                        </a>
+				                                        </div>
+					                                    
+					                                </div>
+												@endif
+											@endforeach
+										</div>
+									@endif
+									<div class="col-md-12 justify-content-center d-flex">
+			                            <button type="submit" class="btn">Adquirir Suscripcion</button>
+			                        </div>
+		                    	</form>
+
 							</div>
 							
 						</div>
+						@endif
+						@if($suscription->premium != '' && $suscription->premium > 0)
 						<div class="col-lg-4 col-md-4 col-12 text-center ">
 							<div class="box-suscription-intern box-suscription">
-								<div class="title">
-									Premium
-								</div>
-								<div class="price">
-									S/{{$suscription->premium}}
-								</div>
+								<form action="{{route('singleAddToCartSuscription')}}" method="POST">
+									@csrf 
+									<input type="hidden" name="suscription_id" value="{{$suscription->id}}">
+									<input type="hidden" name="tipo" value="premium">
+									<div class="title">
+										Premium
+									</div>
+									<div class="price">
+										S/{{$suscription->premium}}
+									</div>
 
-								@if(count($products))
-									<div class="box-products">
-										@foreach($products as $product)
-										 
-											@if($product->condition == 'premium')
+									@if(count($products))
+										<div class="box-products">
+											@foreach($products as $product)
+											 
+												@if($product->condition == 'premium')
+													<div class="row">
+					                                    <div class="col-md-3">
+					                                    	@php 
+				                                                $photo=explode(',',$product->photo);
+				                                            @endphp
+				                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+					                                    </div>
+				                                        <div class="col-md-9 title-prod">
+				                                            <a href="{{route('product-detail',$product->slug)}}"> 
+					                                            {{$product->title}}
+					                                        </a>
+				                                        </div>
+					                                    
+					                                </div>
+												@endif
+												<!-- End Single List -->
+											@endforeach
+										</div>
+									@endif
+									<div class="col-md-12 justify-content-center d-flex">
+			                            <button type="submit" class="btn">Adquirir Suscripcion</button>
+			                        </div>
+			                    </form>
+		                    </div>
+						</div>
+						@endif
+						@if($suscription->superpremium != '' && $suscription->superpremium > 0)
+						<div class="col-lg-4 col-md-4 col-12 text-center">
+							<div class="box-suscription-intern box-suscription">
+								<form action="{{route('singleAddToCartSuscription')}}" method="POST">
+									@csrf 
+									<input type="hidden" name="suscription_id" value="{{$suscription->id}}">
+									<input type="hidden" name="tipo" value="superpremium">
+									<div class="title">
+										Super Premium
+									</div>
+									<div class="price">
+										S/{{$suscription->superpremium}}
+									</div>
+
+									@if(count($products))
+										<div class="box-products">
+											@foreach($products as $product)
+											 	@if($product->condition == 'superpremium')
 												<div class="row">
 				                                    <div class="col-md-3">
 				                                    	@php 
@@ -85,63 +141,28 @@
 			                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
 				                                    </div>
 			                                        <div class="col-md-9 title-prod">
-			                                            <a href="{{route('product-detail',$product->slug)}}"> 
+		                                            	<a href="{{route('product-detail',$product->slug)}}"> 
 				                                            {{$product->title}}
 				                                        </a>
 			                                        </div>
 				                                    
 				                                </div>
-											@endif
-											<!-- End Single List -->
-										@endforeach
-									</div>
-								@endif
-								<div class="col-md-12 justify-content-center d-flex">
-		                            <button class="btn">Adquirir Suscripcion</button>
-		                        </div>
+												@endif
+											@endforeach
+										</div>
+									@endif
+									<div class="col-md-12 justify-content-center d-flex">
+			                            <button class="btn">Adquirir Suscripcion</button>
+			                        </div>
+			                    </form>
 		                    </div>
 						</div>
-						<div class="col-lg-4 col-md-4 col-12 text-center">
-							<div class="box-suscription-intern box-suscription">
-								<div class="title">
-									Super Premium
-								</div>
-								<div class="price">
-									S/{{$suscription->superpremium}}
-								</div>
-
-								@if(count($products))
-									<div class="box-products">
-										@foreach($products as $product)
-										 	@if($product->condition == 'superpremium')
-											<div class="row">
-			                                    <div class="col-md-3">
-			                                    	@php 
-		                                                $photo=explode(',',$product->photo);
-		                                            @endphp
-		                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-			                                    </div>
-		                                        <div class="col-md-9 title-prod">
-	                                            	<a href="{{route('product-detail',$product->slug)}}"> 
-			                                            {{$product->title}}
-			                                        </a>
-		                                        </div>
-			                                    
-			                                </div>
-											@endif
-										@endforeach
-									</div>
-								@endif
-								<div class="col-md-12 justify-content-center d-flex">
-		                            <button class="btn">Adquirir Suscripcion</button>
-		                        </div>
-		                    </div>
-						</div>
+						@endif
 					</div>
 				</div>
 			</section>
 			<!--/ End Product Style 1  -->	
-		</form>
+		
 		<!-- Modal -->
 		@if($products)
 			@foreach($products as $key=>$product)

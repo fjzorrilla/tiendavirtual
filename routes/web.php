@@ -43,6 +43,7 @@ Route::get('/product-brand/{slug}','FrontendController@productBrand')->name('pro
 // Cart section
 Route::get('/add-to-cart/{slug}','CartController@addToCart')->name('add-to-cart')->middleware('user');
 Route::post('/add-to-cart','CartController@singleAddToCart')->name('single-add-to-cart')->middleware('user');
+Route::post('/add-to-cart-suscription','CartController@singleAddToCartSuscription')->name('singleAddToCartSuscription')->middleware('user');
 Route::get('cart-delete/{id}','CartController@cartDelete')->name('cart-delete');
 Route::post('cart-update','CartController@cartUpdate')->name('cart.update');
 

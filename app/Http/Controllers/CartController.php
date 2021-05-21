@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Cart;
+use App\Models\ProductSuscription;
 use Illuminate\Support\Str;
 use Helper;
 class CartController extends Controller
@@ -97,6 +98,40 @@ class CartController extends Controller
         return back();       
     } 
     
+    public function singleAddToCartSuscription(Request $request){
+        $request->validate([
+            'tipo' =>  'required',
+            'suscription_id' =>  'required',
+        ]);
+        
+        $suscriptions = ProductSuscription::where('suscription_id', $request->suscription_id)->get();
+        
+        $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id',null)->where('suscription_id', $request->suscription_id)->first();
+        // return $already_cart;
+
+        if($already_cart) {
+            request()->session()->flash('error','Existe una suscripcion añadida al carrito con estas caracteristicas');
+            return back();
+        }else{
+            foreach ($suscriptions as $key => $suscription) {
+                if(Helper::productDetails($suscription->product_id)[0]->condition == $request->tipo){
+                    $product = Product::where('slug', $request->slug)->first();
+                    $cart = new Cart;
+                    $cart->user_id = auth()->user()->id;
+                    $cart->product_id = $suscription->product_id;
+                    $cart->price = 0;
+                    $cart->quantity = 0;
+                    $cart->amount=0;
+                    $cart->suscription_id=$suscription->suscription_id;
+                    $cart->save();
+                }
+            }
+            
+        }
+        request()->session()->flash('success','Suscripción agregada al carrito Exitosamente.');
+        return back();       
+    } 
+
     public function cartDelete(Request $request){
         $cart = Cart::find($request->id);
         if ($cart) {

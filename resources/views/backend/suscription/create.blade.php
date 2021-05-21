@@ -73,8 +73,6 @@
                   <th>S.N.</th>
                   <th>Nombre</th>
                   <th>Categoria</th>
-                  <th>Precio</th>
-                  <th>Descuento</th>
                   <th>Condición</th>
                   <th>Marcas</th>
                   <th>Stock</th>
@@ -87,8 +85,6 @@
                   <th>S.N.</th>
                   <th>Nombre</th>
                   <th>Categoria</th>
-                  <th>Precio</th>
-                  <th>Descuento</th>
                   <th>Condición</th>
                   <th>Stock</th>
                   <th>Fotos</th>
@@ -112,12 +108,6 @@
                             @endforeach
                           </sub>
                         </td>
-                        @if($product->discount > 0)
-                          <td><span style="text-decoration: line-through;">{{$product->price}}</span> / {{$product->price - ($product->price * $product->discount) / 100}}</td>
-                        @else
-                          <td>{{$product->price}}</td>
-                        @endif
-                        <td>{{$product->discount}}%</td>
                         <td>{{$product->condition}}</td>
                         <td>@foreach($brands as $brand) {{$brand->title}} @endforeach</td>
                         <td>
