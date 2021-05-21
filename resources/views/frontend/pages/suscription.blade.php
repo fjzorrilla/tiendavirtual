@@ -26,66 +26,116 @@
 			<section class="product-area shop-sidebar shop-list shop section">
 				<div class="container">
 					<div class="row">
-								
-							<div class="col-md-8">
-								<label>Condición de Producto: </label>
-								<select class="condition" name="condition" id="condition">
-									<option value="">Seleccione</option>
-									@if($suscription->regular != '' && $suscription->regular > 0)
-										<option value="regular-{{$suscription->regular}}" data="{{$suscription->regular}}">Regular</option>
-									@endif
-									@if($suscription->premium != '' && $suscription->premium > 0)
-									<option value="premium-{{$suscription->premium}}" data="{{$suscription->premium}}">Premium</option>
-									@endif
-									@if($suscription->superpremium != '' && $suscription->superpremium > 0)
-									<option value="superpremium-{{$suscription->premium}}" data="{{$suscription->superpremium}}">Super superpremium</option>
-									@endif
-								</select>
-							</div>
-							<div class="col-md-4">
-								<span class="priceSpan"></span>
-							</div>
-						
-					</div>
-					<div class="row">
-						
-						<div class="col-lg-12 col-md-12 col-12">
-							
-							<div class="row">
+						<div class="col-lg-4 col-md-4 col-12 text-center ">
+							<div class="box-suscription-intern box-suscription">
+								<div class="title">
+									Regular
+								</div>
+								<div class="price">
+									S/{{$suscription->regular}}
+								</div>
+
 								@if(count($products))
-									@foreach($products as $product)
-									 	{{-- {{$product}} --}}
-										<!-- Start Single List -->
-										<div class="producto-card col-lg-3 col-md-3 col-12 {{$product->condition}}">
-	                                        <div class="single-product">
-	                                            <div class="product-img">
-	                                                <a href="{{route('product-detail',$product->slug)}}">
-	                                                    @php 
-	                                                        $photo=explode(',',$product->photo);
-	                                                    @endphp
-	                                                    <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-	                                                    <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-	                                                    
-	                                                </a>
-	                                                
-	                                            </div>
-	                                            <div class="product-content">
-	                                                <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
-	                                                
-	                                            </div>
-	                                        </div>
-	                                    </div>
-										<!-- End Single List -->
-									@endforeach
-								@else
-									<h4 class="text-warning" style="margin:100px auto;">No existen productos para mostrar.</h4>
+									<div class="box-products">
+										@foreach($products as $product)
+											@if($product->condition == 'regular')
+												<div class="row">
+				                                    <div class="col-md-3">
+				                                    	@php 
+			                                                $photo=explode(',',$product->photo);
+			                                            @endphp
+			                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+				                                    </div>
+			                                        <div class="col-md-9 title-prod">
+			                                        	<a href="{{route('product-detail',$product->slug)}}"> 
+				                                            {{$product->title}}
+				                                        </a>
+			                                        </div>
+				                                    
+				                                </div>
+											@endif
+										@endforeach
+									</div>
 								@endif
+								<div class="col-md-12 justify-content-center d-flex">
+		                            <button class="btn">Adquirir Suscripcion</button>
+		                        </div>
 							</div>
-							<div class="row mt-4">
-	                            <div class="col-md-12 justify-content-center d-flex">
-	                                <button class="btn">Adquirir Suscripcion</button>
-	                            </div>
-	                        </div>
+							
+						</div>
+						<div class="col-lg-4 col-md-4 col-12 text-center ">
+							<div class="box-suscription-intern box-suscription">
+								<div class="title">
+									Premium
+								</div>
+								<div class="price">
+									S/{{$suscription->premium}}
+								</div>
+
+								@if(count($products))
+									<div class="box-products">
+										@foreach($products as $product)
+										 
+											@if($product->condition == 'premium')
+												<div class="row">
+				                                    <div class="col-md-3">
+				                                    	@php 
+			                                                $photo=explode(',',$product->photo);
+			                                            @endphp
+			                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+				                                    </div>
+			                                        <div class="col-md-9 title-prod">
+			                                            <a href="{{route('product-detail',$product->slug)}}"> 
+				                                            {{$product->title}}
+				                                        </a>
+			                                        </div>
+				                                    
+				                                </div>
+											@endif
+											<!-- End Single List -->
+										@endforeach
+									</div>
+								@endif
+								<div class="col-md-12 justify-content-center d-flex">
+		                            <button class="btn">Adquirir Suscripcion</button>
+		                        </div>
+		                    </div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-12 text-center">
+							<div class="box-suscription-intern box-suscription">
+								<div class="title">
+									Super Premium
+								</div>
+								<div class="price">
+									S/{{$suscription->superpremium}}
+								</div>
+
+								@if(count($products))
+									<div class="box-products">
+										@foreach($products as $product)
+										 	@if($product->condition == 'superpremium')
+											<div class="row">
+			                                    <div class="col-md-3">
+			                                    	@php 
+		                                                $photo=explode(',',$product->photo);
+		                                            @endphp
+		                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+			                                    </div>
+		                                        <div class="col-md-9 title-prod">
+	                                            	<a href="{{route('product-detail',$product->slug)}}"> 
+			                                            {{$product->title}}
+			                                        </a>
+		                                        </div>
+			                                    
+			                                </div>
+											@endif
+										@endforeach
+									</div>
+								@endif
+								<div class="col-md-12 justify-content-center d-flex">
+		                            <button class="btn">Adquirir Suscripcion</button>
+		                        </div>
+		                    </div>
 						</div>
 					</div>
 				</div>
@@ -228,6 +278,40 @@
     }
     .priceSpan{
     	font-size: 38px;
+    }
+    /*.default-img{
+    	width: 35px;
+    }*/
+    .box-suscription{
+    	border: 1px solid #fed100;
+    	padding-left: 0px;
+    	padding-right: 0px; 
+    	padding-bottom: 15px;
+    }
+    .box-suscription .price{
+    	padding: 20px;
+    	color: #fed100;
+    	font-size: 22px;
+    }
+    .box-suscription .title{
+    	background: #ffbc005e;
+    	padding: 15px;
+    	border-bottom:1px solid #fed100;
+    }
+    .box-products{
+    	margin: 25px;
+		/*border: 1px solid #fed100;*/
+		padding: 15px;
+		border-radius: 5px;
+    }
+    .box-products .row{
+		border-bottom: 1px solid #fed100;
+		margin-bottom: 10px;
+		padding-bottom: 10px;
+    }
+    .title-prod{
+    	padding-top: 5px;
+    	text-align: left;
     }
 </style>
 @endpush

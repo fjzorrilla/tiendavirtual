@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register'=>false]);
+Auth::routes(['register'=>false]); 
 
 Route::get('user/login','FrontendController@login')->name('login.form');
 Route::post('user/login','FrontendController@loginSubmit')->name('login.submit');
@@ -37,7 +37,8 @@ Route::post('/contact/message','MessageController@store')->name('contact.store')
 Route::get('product-detail/{slug}','FrontendController@productDetail')->name('product-detail');
 Route::post('/product/search','FrontendController@productSearch')->name('product.search');
 Route::get('/product-cat/{slug}','FrontendController@productCat')->name('product-cat');
-Route::get('/product-sub-cat/{slug}/{sub_slug}','FrontendController@productSubCat')->name('product-sub-cat');
+Route::get('/product-scat/{slug}/{sub_slug}','FrontendController@productSubSubCat')->name('product-scat');
+Route::get('/product-sub-cat/{cat}/{slug}/{sub_slug}','FrontendController@productSubCat')->name('product-sub-cat');
 Route::get('/product-brand/{slug}','FrontendController@productBrand')->name('product-brand');
 // Cart section
 Route::get('/add-to-cart/{slug}','CartController@addToCart')->name('add-to-cart')->middleware('user');

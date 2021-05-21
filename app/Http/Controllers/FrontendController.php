@@ -40,7 +40,9 @@ class FrontendController extends Controller
         $products=Product::where('status','active')->where('brand_id','<>2')->orderBy('id','DESC')->limit(8)->get();
         $category=Category::where('status','active')->where('is_parent',1)->orderBy('title','ASC')->get();
         $moresale = Cart::where('order_id','<>',null)->pluck('product_id')->groupby('product_id');
-        $suscriptions=Suscription::where('status','active')->orderBy('id','DESC')->get();    
+        $suscriptions=Suscription::where('status','active')->orderBy('id','DESC')->get();   
+        $ofertas=Product::where('status','active')->where('discount','>','0')->orderBy('id','DESC')->limit(4)->get(); 
+        $humanoMascota=Product::where('status','active')->where('cat_id','15')->orderBy('id','DESC')->limit(4)->get();
         // return $category;
         return view('frontend.index')
                 ->with('featured',$featured)
@@ -48,7 +50,9 @@ class FrontendController extends Controller
                 ->with('banners',$banners)
                 ->with('moresale',$moresale) 
                 ->with('suscriptions',$suscriptions) 
-                ->with('category_lists',$category);
+                ->with('category_lists',$category)
+                ->with('ofertas',$ofertas)
+                ->with('humanoMascota',$humanoMascota);
     }   
 
     public function aboutUs(){
@@ -277,19 +281,36 @@ class FrontendController extends Controller
 
     }
     public function productSubCat(Request $request){
-        $products=Category::getProductBySubCat($request->sub_slug);
-        // return $products;
-        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
 
+        $categoryId = DB::table('categories')->where('slug', '=', $request->sub_slug)->first();
+        
+        $products=Product::where('status','active')->where('child_cat_id', $categoryId->id)->paginate(9);
+
+        $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->get();
         if(request()->is('e-shop.loc/product-grids')){
-            return view('frontend.pages.product-grids')->with('products',$products->sub_products)->with('recent_products',$recent_products);
+
+            return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
         }
         else{
-            return view('frontend.pages.product-lists')->with('products',$products->sub_products)->with('recent_products',$recent_products);
+            return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
         }
 
     }
+    public function productSubSubCat(Request $request){
+        $categoryId = DB::table('categories')->where('slug', '=', $request->sub_slug)->first();
+        
+        $products=Product::where('status','active')->where('cat_id', $categoryId->id)->paginate(9);
 
+        $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->get();
+        if(request()->is('e-shop.loc/product-grids')){
+
+            return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
+        }
+        else{
+            return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
+        }
+
+    }
     public function blog(){
         $post=Post::query();
         

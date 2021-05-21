@@ -12,7 +12,7 @@
       <div class="col-12"> 
         <div class="owl-carousel popular-slider">
           <!-- Start Single Product -->
-          @foreach($moresale[""] as $key => $product)
+          @foreach($moresale[""] as $key => $product) 
          
             @php
               $product = Helper::productDetails($product);

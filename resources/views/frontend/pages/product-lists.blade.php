@@ -35,17 +35,20 @@
 										@php
 											// $category = new Category();
 											$menu=App\Models\Category::getAllParentWithChild();
-											//dd($menu);
-											$parametro = explode("/", Request::path())
 											
+											$parametro = explode("/", Request::path())
+
 										@endphp
+										@if(count($parametro) == 0)
+											$parametro[0] = '';
+										@endif
+										
 										@if($menu)
 										<li>
 											@foreach($menu as $cat_info)
-
-													@if($cat_info->child_cat->count()>0 && $cat_info->slug == $parametro[1])
+													@if(count($cat_info->child_cat) > 0 && (isset($parametro[1]) && $cat_info->slug == $parametro[1]))
 														<li>
-                                                            <a href="#">{{$cat_info->title}}</a>
+                                                            <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
 															<ul>
 																@foreach($cat_info->child_cat as $sub_menu)
 																	@php
@@ -53,13 +56,13 @@
 																	@endphp
 																	@if($menu)	
 																		<li>
-	                                                                        - <a href="{{route('product-cat',$sub_menu->slug)}}">       
+	                                                                        - <a href="{{route('product-scat',[$cat_info->slug,$sub_menu->slug])}}">       
 	                                                                        	{{$sub_menu->title}}
 	                                                                        </a>
 	                                                                        <ul>
 	                                                                            @foreach($submenu as $sub_menus)
 	                                                                            
-																					- <a href="{{route('product-sub-cat',[$sub_menu->slug,$sub_menus->slug])}}">       
+																					- <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
 																						{{$sub_menus->title}}
 																					</a>
 	                                                                            @endforeach
@@ -75,19 +78,47 @@
 																@endforeach
 															</ul>
 														</li>
-													@else
-														@if($cat_info->slug == $parametro[1])
-															<a href="#">{{$cat_info->title}}</a>
-														@endif	
 													@endif
 											@endforeach
 										</li>
+										@else
+											@foreach($menu as $cat_info)
+													
+												<li>
+                                                    <a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
+													<ul>
+														@foreach($cat_info->child_cat as $sub_menu)
+															@php
+																$submenu=App\Models\Category::getChildByParentIDMain($sub_menu->id);
+															@endphp
+															@if($menu)	
+																<li>
+                                                                    - <a href="{{route('product-scat',[$cat_info->slug,$sub_menu->slug])}}">       
+                                                                    	{{$sub_menu->title}}
+                                                                    </a>
+                                                                    <ul>
+                                                                        @foreach($submenu as $sub_menus)
+                                                                        
+																			- <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
+																				{{$sub_menus->title}}
+																			</a>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </li>
+                                                            @else
+                                                            	<li>
+                                                                    - <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug])}}">       
+                                                                    	{{$sub_menu->title}}
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+														@endforeach
+													</ul>
+												</li>
+													
+											@endforeach
 										@endif
-                                        {{-- @foreach(Helper::productCategoryList('products') as $cat)
-                                            @if($cat->is_parent==1)
-												<li><a href="{{route('product-cat',$cat->slug)}}">{{$cat->title}}</a></li>
-											@endif
-                                        @endforeach --}}
+                                        
                                     </ul>
                                 </div>
                                 <!--/ End Single Widget -->
@@ -198,10 +229,7 @@
 												</select>
 											</div>
 										</div>
-										<ul class="view-mode">
-											<li><a href="{{route('product-grids')}}"><i class="fa fa-th-large"></i></a></li>
-											<li class="active"><a href="javascript:void(0)"><i class="fa fa-th-list"></i></a></li>
-										</ul>
+						
 									</div>
 									<!--/ End Shop Top -->
 								</div>
@@ -211,7 +239,7 @@
 									@foreach($products as $product)
 									 	{{-- {{$product}} --}}
 										<!-- Start Single List -->
-										<div class="col-lg-4 col-md-6 col-12">
+										<div class="col-lg-3 col-md-3 col-12">
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <a href="{{route('product-detail',$product->slug)}}">

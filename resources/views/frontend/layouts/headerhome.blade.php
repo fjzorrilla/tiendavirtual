@@ -111,124 +111,60 @@
                                   <li>
                                     <a href="">Más Vendidos</a>
                                     <ul>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
+                                      @foreach($moresale[""] as $key => $product)
+                                        @php
+                                          $product = Helper::productDetails($product);
+                                          $photo=explode(',',$product[0]->photo);
+                                        @endphp
+                                        <li>
+                                          <ul>
+                                            <li>
+                                              <a href="{{route('product-detail',$product[0]->slug)}}">
+                                                <img src="{{$photo[0]}}" alt="sample38"/>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </li>
+                                      @endforeach
                                       
                                     </ul>
                                   </li>
                                   <li>
                                     <a href="">Ofertas</a>
                                     <ul>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      
+                                      @foreach($ofertas as $key => $oferta)
+                                        @php
+                                          $photo=explode(',',$oferta->photo);
+                                        @endphp
+                                        <li>
+                                          <ul>
+                                            <li>
+                                              <a href="{{route('product-detail',$oferta->slug)}}">
+                                                <img src="{{$photo[0]}}" alt="sample38"/>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </li>
+                                      @endforeach
                                     </ul>
                                   </li>
                                   <li>
                                     <a href="">Humano / Mascota</a>
                                     <ul>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-                                      <li>
-                                        <ul>
-                                          <li>
-                                            <img src="{{ asset('img/perro.png') }}" alt="sample38"/>
-                                          </li>
-                                        </ul>
-                                      </li>
-
+                                      @foreach($humanoMascota as $key => $humano)
+                                        @php
+                                          $photo=explode(',',$humano->photo);
+                                        @endphp
+                                        <li>
+                                          <ul>
+                                            <li>
+                                              <a href="{{route('product-detail',$humano->slug)}}">
+                                                <img src="{{$photo[0]}}" alt="sample38"/>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </li>
+                                      @endforeach
                                     </ul>
                                   </li>
                                 </ul>
