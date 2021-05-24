@@ -241,15 +241,34 @@ class FrontendController extends Controller
             }
     }
     public function productSearch(Request $request){
-        $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->limit(3)->get();
-        $products=Product::orwhere('title','like','%'.$request->search.'%')
+        $recent_products=Product::where('status','active')->orderBy('id','DESC')->limit(3)->get();
+        
+        if($request->cat != "0"){
+            $categoryId = DB::table('categories')->where('slug', '=', $request->cat)->first();
+            if($request->search){
+                
+                $products=Product::where('cat_id',$categoryId->id)
+                    ->orwhere('child_cat_id',$categoryId->id)
+                    ->where('title','like','%'.$request->search.'%')
+                    ->orderBy('id','DESC')
+                    ->paginate('9'); 
+            }else{
+               
+                $products=Product::where('cat_id',$categoryId->id)
+                    ->orderBy('id','DESC')
+                    ->paginate('9');
+            }
+        }else{
+            
+            $products=Product::orwhere('title','like','%'.$request->search.'%')
                     ->orwhere('slug','like','%'.$request->search.'%')
                     ->orwhere('description','like','%'.$request->search.'%')
                     ->orwhere('summary','like','%'.$request->search.'%')
                     ->orwhere('price','like','%'.$request->search.'%')
                     ->orderBy('id','DESC')
                     ->paginate('9');
-        return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
+        }
+        return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
     }
     public function calendarAjaxDate(Request $request){
         $dates = DB::table('day_shippings')->get();
