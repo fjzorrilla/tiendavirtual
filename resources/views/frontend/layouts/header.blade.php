@@ -1,4 +1,3 @@
-
 <header class="header shop">
     <!-- Topbar -->
     <div class="topbar">
@@ -107,13 +106,14 @@
                         <div class="menu-area">
                             <div class="menu">
                                 <ul>
+                                   
                                     <li><a href="/">Inicio</a></li>
                                     @php
                                         $mainCat = Helper::getAllCategory();
                                     @endphp
                                     @foreach($mainCat as $key =>$main)
 
-                                        <li class="{{Request::path()=='product-cat/perros' ? 'active' : ''}}">
+                                        <li class="{{strpos(Request::path(), $main->slug) ? 'active' : ''}}">
                                             <a href="{{route('product-cat',$main->slug)}}">{{$main->title}}</a>
                                             <ul>
                                                 

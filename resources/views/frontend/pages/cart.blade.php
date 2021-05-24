@@ -17,7 +17,21 @@
 		</div>
 	</div>
 	<!-- End Breadcrumbs -->
-			
+	@php
+		$totalCart = 0;
+		if(auth()->user()){
+	        $user_id = auth()->user()->id;
+	        $carrito=DB::table('carts')->where('user_id',$user_id)->where('order_id',null)->count('suscription_id');
+	        
+	        if($carrito > 0){
+	            $suscription = DB::table('carts')->where('user_id',$user_id)->first();
+	            $suscriptionsPrice=DB::table('suscriptions')->where('id',$suscription->suscription_id)->pluck($suscription->tipo)->first();
+	            $totalCart = $suscriptionsPrice;
+	        }else{
+	        	$totalCart = Helper::totalCartPrice();
+	    	}
+		}
+	@endphp
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section">
 		<div class="container">
@@ -72,6 +86,8 @@
 											<td class="action" data-title="Remove">
 												@if(!$cart->suscription_id && $cart->suscription_id == '')
 													<a href="{{route('cart-delete',$cart->id)}}"><i class="ti-trash remove-icon"></i></a>
+												@else
+													Suscripcion
 												@endif
 											</td>
 										</tr>
@@ -126,7 +142,7 @@
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Cart Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span></li>
+										<li class="order_subtotal" data-price="{{$totalCart}}">Cart Subtotal<span>${{number_format($totalCart,2)}}</span></li>
 										{{-- <div id="shipping" style="display:none;">
 											<li class="shipping">
 												Shipping {{session('shipping_price')}}
@@ -152,7 +168,7 @@
 										<li class="coupon_price" data-price="{{Session::get('coupon')['value']}}">You Save<span>${{number_format(Session::get('coupon')['value'],2)}}</span></li>
 										@endif
 										@php
-											$total_amount=Helper::totalCartPrice();
+											$total_amount=$totalCart;
 											if(session()->has('coupon')){
 												$total_amount=$total_amount-Session::get('coupon')['value'];
 											}

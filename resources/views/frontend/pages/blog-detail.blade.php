@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','E-TECH || Blog Detail page')
+@section('title','PUPPIES HUND || Blog Page')
 
 @section('main-content')
     <!-- Breadcrumbs -->
@@ -21,20 +21,21 @@
     <!-- End Breadcrumbs -->
         
     <!-- Start Blog Single -->
-    <section class="blog-single section">
+    <section class="blog-single section pt-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-12">
                     <div class="blog-single-main">
                         <div class="row">
                             <div class="col-12">
+                                <h2 class="blog-title">{{$post->title}}</h2>
                                 <div class="image">
                                     <img src="{{$post->photo}}" alt="{{$post->photo}}">
                                 </div>
                                 <div class="blog-detail">
-                                    <h2 class="blog-title">{{$post->title}}</h2>
+                                    
                                     <div class="blog-meta">
-                                        <span class="author"><a href="javascript:void(0);"><i class="fa fa-user"></i>By {{$post->author_info['name']}}</a><a href="javascript:void(0);"><i class="fa fa-calendar"></i>{{$post->created_at->format('M d, Y')}}</a><a href="javascript:void(0);"><i class="fa fa-comments"></i>Comment ({{$post->allComments->count()}})</a></span>
+                                        <span class="author"><a href="javascript:void(0);"><i class="fa fa-user"></i>Por: {{$post->author_info['name']}}</a><a href="javascript:void(0);"><i class="fa fa-calendar"></i>{{$post->created_at->format('M d, Y')}}</a><a href="javascript:void(0);"><i class="fa fa-comments"></i>Comentarios ({{$post->allComments->count()}})</a></span>
                                     </div>
                                     <div class="sharethis-inline-reaction-buttons"></div>
                                     <div class="content">

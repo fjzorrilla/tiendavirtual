@@ -122,6 +122,7 @@ class CartController extends Controller
                     $cart->price = 0;
                     $cart->quantity = 0;
                     $cart->amount=0;
+                    $cart->tipo=$request->tipo;
                     $cart->suscription_id=$suscription->suscription_id;
                     $cart->save();
                 }

@@ -3,7 +3,21 @@
 @section('title','Checkout page')
 
 @section('main-content')
-
+    @php
+        $user_id = auth()->user()->id;
+        $carrito=DB::table('carts')->where('user_id',$user_id)->where('order_id',null)->count('suscription_id');
+        $totalCart = 0;
+        if($carrito > 0){
+            $suscription = DB::table('carts')->where('user_id',$user_id)->first();
+            $suscriptionsPrice=DB::table('suscriptions')->where('id',$suscription->suscription_id)->pluck($suscription->tipo)->first();
+            
+            $totalCart = $suscriptionsPrice;
+            $suscriptionType = $suscription->tipo;
+        }else{
+            $totalCart = Helper::totalCartPrice();
+            $suscriptionType = '';
+        }
+    @endphp
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">
@@ -359,9 +373,10 @@
                                 <!-- Order Widget -->
                                 <div class="single-widget">
                                     <h2>CART  TOTALS</h2>
+                                    <h2 style="display:{{$suscriptionType == '' ? 'none' : ''}}">Suscripción: {{$suscriptionType}}</h2>
                                     <div class="content">
                                         <ul>
-										    <li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Cart Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span></li>
+										    <li class="order_subtotal" data-price="{{$totalCart}}">Cart Subtotal<span>${{number_format($totalCart,2)}}</span></li>
                                             <li class="shipping">
                                                 Shipping Cost
                                                 @if(count(Helper::shipping())>0 && Helper::cartCount()>0)
@@ -380,7 +395,7 @@
                                             <li class="coupon_price" data-price="{{session('coupon')['value']}}">You Save<span>${{number_format(session('coupon')['value'],2)}}</span></li>
                                             @endif
                                             @php
-                                                $total_amount=Helper::totalCartPrice();
+                                                $total_amount=$totalCart;
                                                 if(session('coupon')){
                                                     $total_amount=$total_amount-session('coupon')['value'];
                                                 }
@@ -417,13 +432,15 @@
                                 </div>
                                 <!--/ End Payment Method Widget -->
                                 <!-- Button Widget -->
-                                <div class="single-widget get-button">
-                                    <div class="content">
-                                        <div class="button">
-                                            <button type="submit" class="btn">proceed to checkout</button>
+                                @if(auth()->user() && $totalCart > 0)
+                                    <div class="single-widget get-button">
+                                        <div class="content">
+                                            <div class="button">
+                                                <button type="submit" class="btn">proceed to checkout</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                                 <!--/ End Button Widget -->
                             </div>
                         </div>

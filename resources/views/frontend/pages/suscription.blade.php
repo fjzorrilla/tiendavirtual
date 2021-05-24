@@ -44,13 +44,13 @@
 											@foreach($products as $product)
 												@if($product->condition == 'regular')
 													<div class="row">
-					                                    <div class="col-md-3">
+					                                    <div class="col-xs-3 col-sm-3">
 					                                    	@php 
 				                                                $photo=explode(',',$product->photo);
 				                                            @endphp
 				                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
 					                                    </div>
-				                                        <div class="col-md-9 title-prod">
+				                                        <div class="col-xs-9 col-sm-9 title-prod">
 				                                        	<a href="{{route('product-detail',$product->slug)}}"> 
 					                                            {{$product->title}}
 					                                        </a>
@@ -90,13 +90,13 @@
 											 
 												@if($product->condition == 'premium')
 													<div class="row">
-					                                    <div class="col-md-3">
+					                                    <div class="col-xs-3 col-sm-3">
 					                                    	@php 
 				                                                $photo=explode(',',$product->photo);
 				                                            @endphp
 				                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
 					                                    </div>
-				                                        <div class="col-md-9 title-prod">
+				                                        <div class="col-xs-9 col-sm-9 title-prod">
 				                                            <a href="{{route('product-detail',$product->slug)}}"> 
 					                                            {{$product->title}}
 					                                        </a>
@@ -134,19 +134,19 @@
 											@foreach($products as $product)
 											 	@if($product->condition == 'superpremium')
 												<div class="row">
-				                                    <div class="col-md-3">
-				                                    	@php 
-			                                                $photo=explode(',',$product->photo);
-			                                            @endphp
-			                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-				                                    </div>
-			                                        <div class="col-md-9 title-prod">
-		                                            	<a href="{{route('product-detail',$product->slug)}}"> 
-				                                            {{$product->title}}
-				                                        </a>
-			                                        </div>
-				                                    
-				                                </div>
+					                                    <div class="col-xs-3 col-sm-3">
+					                                    	@php 
+				                                                $photo=explode(',',$product->photo);
+				                                            @endphp
+				                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+					                                    </div>
+				                                        <div class="col-xs-9 col-sm-9 title-prod">
+				                                            <a href="{{route('product-detail',$product->slug)}}"> 
+					                                            {{$product->title}}
+					                                        </a>
+				                                        </div>
+					                                    
+					                                </div>
 												@endif
 											@endforeach
 										</div>

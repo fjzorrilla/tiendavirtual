@@ -267,7 +267,7 @@ class FrontendController extends Controller
 
     }
     public function productCat(Request $request){
-        
+
         $categoryId = DB::table('categories')->where('slug', '=', $request->slug)->first();
         $products=Product::where('status','active')->where('cat_id', $categoryId->id)->paginate(9);
         $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->get();

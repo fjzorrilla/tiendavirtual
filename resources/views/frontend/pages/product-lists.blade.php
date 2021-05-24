@@ -62,7 +62,7 @@
 	                                                                        <ul>
 	                                                                            @foreach($submenu as $sub_menus)
 	                                                                            
-																					- <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
+																					+ <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
 																						{{$sub_menus->title}}
 																					</a><br>
 	                                                                            @endforeach
@@ -99,7 +99,7 @@
                                                                     <ul>
                                                                         @foreach($submenu as $sub_menus)
                                                                         
-																			- <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
+																			+ <a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug,$sub_menus->slug])}}">       
 																				{{$sub_menus->title}}
 																			</a>
                                                                         @endforeach

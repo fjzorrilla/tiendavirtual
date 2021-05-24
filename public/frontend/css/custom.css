@@ -3777,6 +3777,7 @@ Screen style's
   padding: 4px 0;
   margin: 0;
   font-size: 0.8em;
+  /*text-align: center;*/
 }
 .menu > ul > li > ul > li > ul > li img {
   width: 135px;
