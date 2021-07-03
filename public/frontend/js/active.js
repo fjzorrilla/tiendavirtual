@@ -342,13 +342,25 @@ window.onload = () => {
 			scrollSpeed: 900,
 			animation: 'fade'
 		});  
+		$(".linkForm").click(function(){
+			console.log("Pruebas")
+			if($(this).hasClass("linkLogin")){
+				$(".formlogin").removeClass('hide')
+				$(".formregister").addClass('hide')
+			}else{
+				$(".formregister").removeClass('hide')
+				$(".formlogin").addClass('hide')
+			}
+			$(".linkForm").removeClass("active")
+			$(this).addClass("active")
+		})
 		
 	});
 	
 	/*====================================
 	18. Nice Select JS
 	======================================*/	
-	$('select').niceSelect();
+	//$('select').niceSelect();
 		
 	/*=====================================
 	 Others JS

@@ -288,11 +288,10 @@ class FrontendController extends Controller
     public function productCat(Request $request){
 
         $categoryId = DB::table('categories')->where('slug', '=', $request->slug)->first();
-        $products=Product::where('status','active')->where('cat_id', $categoryId->id)->paginate(9);
+        $products=Product::where('status','active')->where('cat_id', $categoryId->id)->paginate(9); 
         $recent_products=Product::where('status','active')->where('brand_id','1')->orderBy('id','DESC')->get();
         if(request()->is('e-shop.loc/product-grids')){
-
-            return view('frontend.pages.product-grids')->with('products',$products)->with('recent_products',$recent_products);
+            return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);
         }
         else{
             return view('frontend.pages.product-lists')->with('products',$products)->with('recent_products',$recent_products);

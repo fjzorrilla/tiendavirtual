@@ -3643,8 +3643,13 @@ figure.snip0015:hover figcaption::before {
   float: left;
 }
 .modal.show .modal-dialog {
-  max-width: 70%;
-  width: 70%;
+  max-width: 50%;
+  width: 50%;
+}
+.modal-dialog {
+    margin: 5% auto 8% !important;
+    max-width: 1358px;
+    width: 1358px;
 }
 .description {
   width: 80%;
@@ -3879,4 +3884,14 @@ Mobile style's
     background: none;
     float: left;
     margin-right: 6px;
+}
+.linkForm{
+  cursor: pointer;
+}
+.linkForm.active{
+  padding-bottom: 10px;
+  border-bottom: 3px solid;
+}
+#registerModal .modal-dialog .modal-content .modal-body{
+  overflow-y: hidden !important;
 }
